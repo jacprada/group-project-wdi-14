@@ -22,7 +22,7 @@ app.use(methodOverride(function(req, res){
     delete req.body._method
     return method
   }
-}))
+}));
 
 app.use( cookieParser() );
 app.use(expressSession({secret: 'mySecretKey'}));
@@ -33,15 +33,11 @@ app.use(logger('dev'));
 app.listen(3000);
 
 var User = require('./models/user');
+var Bar = require('./models/bar');
 
-// FACEBOOK
+// USER ROUTES
 
-// require("./config/passport")(passport, FacebookStrategy)
-
-app.get('/', function(req, res){
-  res.render('layout', { user: req.user });
-});
-
+// INDEX
 app.get('/users', function(req, res){
   User.find({}, function(err, users){
     if (err) console.log(err);
@@ -49,6 +45,7 @@ app.get('/users', function(req, res){
   });
 });
 
+// SHOW
 app.get('/users/:id', function(req, res){
   User.findById(req.params.id, function(err, user){
     if (err) console.log(err);
@@ -56,6 +53,7 @@ app.get('/users/:id', function(req, res){
   });
 });
 
+// CREATE
 app.post('/users', function(req, res){
   User.create(req.body, function(err, user){
     if(err) console.log(err);
@@ -64,16 +62,21 @@ app.post('/users', function(req, res){
   });
 })
 
+// UPDATE
 app.post('/users/:id', function(req, res){
   User.update({_id: req.params.id}, {
     email: req.body.email, 
     firstName: req.body.firstName
   }, function(err, user){
-    if(err) console.log(err);
-    res.json(user.get)
+    if(err){
+      res.send(err)
+    } else {
+      res.json(user.get)
+    }
   });
-})
+});
 
+// DELETE
 app.delete('/users/:id', function(req, res){
   User.findByIdAndRemove({_id: req.params.id}, function(err){
     if (err) {
@@ -83,6 +86,62 @@ app.delete('/users/:id', function(req, res){
     }
   });
 });
+
+// BAR ROUTES
+
+// INDEX
+app.get('/bars', function(req, res){
+  Bar.find({}, function(err, bars){
+    if (err) console.log(err);
+    res.json(bars);
+  });
+});
+
+// SHOW
+app.get('/bars/:id', function(req, res){
+  Bar.findById(req.params.id, function(err, bar){
+    if (err) console.log(err);
+    res.json(bar);
+  });
+});
+
+// CREATE
+app.post('/bars', function(req, res){
+  Bar.create(req.body, function(err, bar){
+    if(err) console.log(err);
+    res.json(bar);
+    console.log(bar)
+  });
+})
+
+// UPDATE
+app.post('/bars/:id', function(req, res){
+  Bar.update({_id: req.params.id}, {
+    email: req.body.email, 
+    firstName: req.body.firstName
+  }, function(err, bar){
+    if(err){
+      res.send(err)
+    } else {
+      res.json(bar.get)
+    }
+  });
+});
+
+// DELETE
+app.delete('/bars/:id', function(req, res){
+  Bar.findByIdAndRemove({_id: req.params.id}, function(err){
+    if (err) {
+      res.send(err)
+    } else {
+      res.json("202 Accepted");
+    }
+  });
+});
+
+// FACEBOOK
+
+// require("./config/passport")(passport, FacebookStrategy)
 
 // app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
 
@@ -109,21 +168,13 @@ app.delete('/users/:id', function(req, res){
 //   console.log('User saved');
 // });
 
+// var b1 = new Bar({
+//     name: "Sushisamba",
+//     address: "110 Bishopsgate, EC2N 4AY",
+//     image: "http://assets.londonist.com/uploads/2015/04/i640/sushisamba-terrace.jpg"
+// });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// b1.save(function(err){
+//   if(err) console.log(err);
+//   console.log('Bar saved');
+// });
