@@ -74,7 +74,7 @@ app.post('/users/:id', function(req, res){
   });
 })
 
-function userDelete(req, res){
+app.delete('/users/:id', function(req, res){
   User.findByIdAndRemove({_id: req.params.id}, function(err){
     if (err) {
       res.send(err)
@@ -82,9 +82,7 @@ function userDelete(req, res){
       res.json("202 Accepted");
     }
   });
-}
-
-
+});
 
 // app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
 
