@@ -7,7 +7,7 @@ var barSchema = new mongoose.Schema({
   description:          String,
   image:                String, // to be rendered into an actual image
   facebook_url:         String,
-  creator:              { type: mongoose.Schema.ObjectId, ref: 'User' } 
+  _creator:             { type: mongoose.Schema.ObjectId, ref: 'User' } 
 });
 var Bar = mongoose.model("Bar", barSchema);
 module.exports = Bar;

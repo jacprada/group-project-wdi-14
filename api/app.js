@@ -90,18 +90,37 @@ app.delete('/users/:id', function(req, res){
 // BAR ROUTES
 
 // INDEX
+// app.get('/bars', function(req, res){
+//   Bar.find({}, function(err, bars){
+//     if (err) console.log(err);
+//     res.json(bars);
+//   });
+// });
+
 app.get('/bars', function(req, res){
-  Bar.find({}, function(err, bars){
-    if (err) console.log(err);
-    res.json(bars);
-  });
+  Bar.find({})
+    .populate('_creator')
+    .exec(function (err, bars) {
+      if (err) return handleError(err);
+      res.json(bars);
+    });
 });
 
 // SHOW
+// app.get('/bars/:id', function(req, res){
+//   Bar.findById(req.params.id, function(err, bar){
+//     if (err) console.log(err);
+//     res.json(bar);
+//   });
+// });
+
 app.get('/bars/:id', function(req, res){
-  Bar.findById(req.params.id, function(err, bar){
-    if (err) console.log(err);
+  Bar.findOne({ _id: req.params.id })
+  .populate('_creator')
+  .exec(function (err, bar) {
+    if (err) return handleError(err);
     res.json(bar);
+    console.log('The bar creator is %s', bar._creator.firstName);
   });
 });
 
@@ -191,7 +210,8 @@ app.get('/logout', function(req, res){
 //     lat: 51.511913,
 //     lng: -0.118505,
 //     description: "Set atop the ME London hotel, Radio bar — so called because it’s on the site of the old Marconi House — is a sleek asymmetric treat for the eyes in itself.",
-//     image: "http://assets.londonist.com/uploads/2015/04/i640/radio-rooftop.jpg"
+//     image: "http://assets.londonist.com/uploads/2015/04/i640/radio-rooftop.jpg",
+//     _creator: u1._id
 // });
 
 // b1.save(function(err){
