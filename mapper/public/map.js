@@ -103,7 +103,9 @@ function initialize() {
           '</div>'
         });
       marker.addListener('click', function() {
-          infowindow.open(map, marker);
+        map.setCenter(marker.getPosition());
+        infowindow.open(map, marker);
+
         });
     });
   });
