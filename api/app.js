@@ -289,21 +289,21 @@ app.delete('/bars/:id', function(req, res){
 
 // FACEBOOK
 
-require("./config/passport")(passport, FacebookStrategy)
+// require("./config/passport")(passport, FacebookStrategy)
 
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
+// app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
 
-app.get('/auth/facebook/callback', passport.authenticate('facebook',
-{
-  successRedirect: '/',
-  failureRedirect: '/'
-})
-);
+// app.get('/auth/facebook/callback', passport.authenticate('facebook',
+// {
+//   successRedirect: '/',
+//   failureRedirect: '/'
+// })
+// );
 
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
+// app.get('/logout', function(req, res){
+//   req.logout();
+//   res.redirect('/');
+// });
 
 // DATA
 // var u1 = new User({
@@ -317,50 +317,50 @@ app.get('/logout', function(req, res){
 //   console.log('User saved');
 // });
 
-var b1 = new Bar({
-name: "Radio Rooftop Bar",
-address: "336-337 Strand, WC2R 1HA",
-lat: 51.511886,
-lng: -0.118537,
-description: "Set atop the ME London hotel, Radio bar — so called because it’s on the site of the old Marconi House — is a sleek asymmetric treat for the eyes in itself.",
-image: "http://assets.londonist.com/uploads/2015/04/i640/radio-rooftop.jpg",
-facebook_url: "https://www.facebook.com/MeliaHotelsInternational",
-});
+// var b1 = new Bar({
+// name: "Radio Rooftop Bar",
+// address: "336-337 Strand, WC2R 1HA",
+// lat: 51.511886,
+// lng: -0.118537,
+// description: "Set atop the ME London hotel, Radio bar — so called because it’s on the site of the old Marconi House — is a sleek asymmetric treat for the eyes in itself.",
+// image: "http://assets.londonist.com/uploads/2015/04/i640/radio-rooftop.jpg",
+// facebook_url: "https://www.facebook.com/MeliaHotelsInternational",
+// });
 
-b1.save(function(err){
-if(err) console.log(err);
-console.log('Bar saved');
-});
+// b1.save(function(err){
+// if(err) console.log(err);
+// console.log('Bar saved');
+// });
 
-var b2 = new Bar({
-name: "Aqua Spirit",
-address: "5th floor, 240 Regent Street, W1B 3BR",
-lat: 51.514332,
-lng: -0.141774,
-description: "A great spot to know about, this slick cocktail sanctuary high above Regent Street — part of Aqua Kyoto restaurant — is in a prime position for post-shopping recuperation.",
-image: "http://www.fluidnetwork.co.uk/gfx/venues/20350/aqua_spirit_bar_soho_cocktail_best_london_03.jpg",
-facebook_url: "https://www.facebook.com/Aqualondon",
-});
+// var b2 = new Bar({
+// name: "Aqua Spirit",
+// address: "5th floor, 240 Regent Street, W1B 3BR",
+// lat: 51.514332,
+// lng: -0.141774,
+// description: "A great spot to know about, this slick cocktail sanctuary high above Regent Street — part of Aqua Kyoto restaurant — is in a prime position for post-shopping recuperation.",
+// image: "http://www.fluidnetwork.co.uk/gfx/venues/20350/aqua_spirit_bar_soho_cocktail_best_london_03.jpg",
+// facebook_url: "https://www.facebook.com/Aqualondon",
+// });
 
-b2.save(function(err){
-if(err) console.log(err);
-console.log('Bar saved');
-});
+// b2.save(function(err){
+// if(err) console.log(err);
+// console.log('Bar saved');
+// });
 
-var b3 = new Bar({
-name: "Aqua Spirit",
-address: "68-70 Whitfield Street, W1T 4EY",
-lat: 51.521871,
-lng: -0.136400,
-description: "This characterful pub just off Tottenham Court Road has something special up its sleeve — a rooftop beer garden. It may not be the greenest of gardens, but it’s a pretty sweet spot for a pint in the sunshine all the same.",
-image: "http://pubshistory.com/LondonPubs/StPancras/CarpentersArms.jpg",
-facebook_url: "https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.thecarpentersarmsw1.co.uk%2Ffindus%23.VdyIC95dSUU.facebook",
-});
+// var b3 = new Bar({
+// name: "Aqua Spirit",
+// address: "68-70 Whitfield Street, W1T 4EY",
+// lat: 51.521871,
+// lng: -0.136400,
+// description: "This characterful pub just off Tottenham Court Road has something special up its sleeve — a rooftop beer garden. It may not be the greenest of gardens, but it’s a pretty sweet spot for a pint in the sunshine all the same.",
+// image: "http://pubshistory.com/LondonPubs/StPancras/CarpentersArms.jpg",
+// facebook_url: "https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.thecarpentersarmsw1.co.uk%2Ffindus%23.VdyIC95dSUU.facebook",
+// });
 
-b3.save(function(err){
-if(err) console.log(err);
-console.log('Bar saved');
-});
+// b3.save(function(err){
+// if(err) console.log(err);
+// console.log('Bar saved');
+// });
 
 // var b4 = new Bar({
 // name: "Angler",
