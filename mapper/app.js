@@ -6,6 +6,14 @@ var bodyParser   = require('body-parser');
 var databaseURL = process.env.MONGOLAB_URI || 'mongodb://localhost/mapper';
 mongoose.connect(databaseURL);
 
+var geocoderProvider = 'google';
+var httpAdapter = 'https';
+var extra = {
+  apiKey: 'AIzaSyBpZuu3CKBlKJ5Zelpqn8qJ7VDABD6yjXA',
+  formatter: null
+};
+var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -52,19 +60,31 @@ app.get("/new", function(req, res) {
 
 //create
 app.post("/", function(req, res){
-  Club.create(req.body, function(err, club){
-    if(err){
-      res.send(err)
-    } else {
-      res.format({
-        'application/json': function(){
-          res.json(club); },
-          'text/html': function(){
-            res.redirect('/')
-          }
-        })
-    }
-  })
+  geocoder.geocode(req.body.address, function(err, geocode) {
+    var newClub = new Club();
+    newClub.name = req.body.name;
+    newClub.address = req.body.address;
+    newClub.description = req.body.description;
+    newClub.image = req.body.image;
+    newClub.facebook_url = req.body.facebook_url;
+    newClub.lat = parseFloat(geocode[0].latitude);
+    newClub.lng = parseFloat(geocode[0].longitude);
+
+    newClub.save(function(err, club){
+      if(err){
+        res.send(err)
+      } else {
+        console.log(club);
+        res.format({
+          'application/json': function(){
+            res.json(club); },
+            'text/html': function(){
+              res.redirect('/')
+            }
+          })
+      }
+    })
+  });
 });
 
 // //destroy

@@ -67,18 +67,16 @@ function initialize() {
 
   var map = new google.maps.Map(mapCanvas, mapOptions);
 
-  var contentString = '<div id="content">'+
-        '<div id="siteNotice">'+
-        '</div>'+
-        '<h2 id="firstHeading" class="firstHeading">Second Home</h2>'+
-        '<div id="bodyContent">'+
-        '<p><b>Second Home</b> provides beautiful private studios for creative companies' +
-        'as well as tranquil space for individuals and small teams to flourish.</p>' +
-        '<a href="https://citymapper.com/directions?endcoord=51.520257,-0.070272&endname=Second%20Home" target="_blank">Get There</a>' +
-        '</div>'+
-        '</div>';
-
-
+  // var contentString = '<div id="content">'+
+  //       '<div id="siteNotice">'+
+  //       '</div>'+
+  //       '<h2 id="firstHeading" class="firstHeading">Second Home</h2>'+
+  //       '<div id="bodyContent">'+
+  //       '<p><b>Second Home</b> provides beautiful private studios for creative companies' +
+  //       'as well as tranquil space for individuals and small teams to flourish.</p>' +
+  //       '<a href="https://citymapper.com/directions?endcoord=51.520257,-0.070272&endname=Second%20Home" target="_blank">Get There</a>' +
+  //       '</div>'+
+  //       '</div>';
 
   var ajax = $.get('http://localhost:9000/')
   .done(function(data){
@@ -97,9 +95,9 @@ function initialize() {
           '</div>'+
           '<h2 id="firstHeading" class="firstHeading">' + club.name + '</h2>'+
           '<div id="bodyContent">'+
-          '<img src="' + club.image + '" width="200px" heigth="150px">' +
+          '<img src="' + club.image + '" height="200px">' +
           '<p>' + club.description + '</p>' +
-          '<a href="' + club.facebook_url + '" target="_blank">Facebook</a>' +
+          '<a href="' + club.facebook_url + '" target="_blank">Facebook</a><br>' +
           '<a href="https://citymapper.com/directions?endcoord=' + club.lat + ',' + club.lng + '&endname=' + club.name +'" target="_blank">Get There</a>' +
           '</div>'+
           '</div>'
