@@ -9,7 +9,7 @@ mongoose.connect(databaseURL);
 var geocoderProvider = 'google';
 var httpAdapter = 'https';
 var extra = {
-  apiKey: 'AIzaSyBpZuu3CKBlKJ5Zelpqn8qJ7VDABD6yjXA',
+  apiKey: process.env.GOOGLE_GEOCODER_API_KEY,
   formatter: null
 };
 var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
@@ -61,12 +61,14 @@ app.get("/new", function(req, res) {
 //create
 app.post("/", function(req, res){
   geocoder.geocode(req.body.address, function(err, geocode) {
+    
     var newClub = new Club();
     newClub.name = req.body.name;
     newClub.address = req.body.address;
     newClub.description = req.body.description;
     newClub.image = req.body.image;
     newClub.facebook_url = req.body.facebook_url;
+
     newClub.lat = parseFloat(geocode[0].latitude);
     newClub.lng = parseFloat(geocode[0].longitude);
 
