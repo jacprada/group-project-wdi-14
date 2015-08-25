@@ -1,0 +1,38 @@
+[
+  {
+      "name": "Radio Rooftop Bar",
+      "address": "336-337 Strand, WC2R 1HA",
+      "lat": 51.511886,
+      "lng": -0.118537,
+      "description": "Set atop the ME London hotel, Radio bar — so called because it’s on the site of the old Marconi House — is a sleek asymmetric treat for the eyes in itself.",
+      "image": "http://assets.londonist.com/uploads/2015/04/i640/radio-rooftop.jpg",
+      "facebook_url": "https://www.facebook.com/MeliaHotelsInternational"
+  },
+  {
+      "name": "The Carpenter's Arms",
+      "address": "68-70 Whitfield Street, W1T 4EY",
+      "lat": 51.521871,
+      "lng": -0.1364,
+      "description": "This characterful pub just off Tottenham Court Road has something special up its sleeve — a rooftop beer garden. It may not be the greenest of gardens, but it’s a pretty sweet spot for a pint in the sunshine all the same.",
+      "image": "http://pubshistory.com/LondonPubs/StPancras/CarpentersArms.jpg",
+      "facebook_url": "https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.thecarpentersarmsw1.co.uk%2Ffindus%23.VdyIC95dSUU.facebook"
+  },
+  {
+      "name": "Aqua Spirit",
+      "address": "5th floor, 240 Regent Street, W1B 3BR",
+      "lat": 51.514332,
+      "lng": -0.141774,
+      "description": "A great spot to know about, this slick cocktail sanctuary high above Regent Street — part of Aqua Kyoto restaurant — is in a prime position for post-shopping recuperation.",
+      "image": "http://www.fluidnetwork.co.uk/gfx/venues/20350/aqua_spirit_bar_soho_cocktail_best_london_03.jpg",
+      "facebook_url": "https://www.facebook.com/Aqualondon"
+  },
+  {
+      "name": "Angler",
+      "address": "68-70 Whitfield Street, W1T 4EY",
+      "lat": 51.521517,
+      "lng": -0.136035,
+      "description": "Planted with lavender, herbs and olive trees, this rooftop terrace at South Place Hotel brings a little piece of Provence to Moorgate — not that there’s anywhere in Provence that also affords you a bird’s eye view of the ongoing Crossrail works in the area. Call by for a drink daily from midday until 11.30pm.",
+      "image": "https://farm9.static.flickr.com/8200/8178736862_03e9c6348d_b.jpg",
+      "facebook_url": "https://www.facebook.com/3SouthPlace"
+  }
+]
