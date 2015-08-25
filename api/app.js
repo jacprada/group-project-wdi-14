@@ -60,7 +60,7 @@ app.post('/users', function(req, res){
     res.json(user);
     console.log(user)
   });
-})
+});
 
 // UPDATE
 app.post('/users/:id', function(req, res){
@@ -106,13 +106,29 @@ app.get('/bars/:id', function(req, res){
 });
 
 // CREATE
-app.post('/bars', function(req, res){
-  Bar.create(req.body, function(err, bar){
-    if(err) console.log(err);
-    res.json(bar);
-    console.log(bar)
+app.post("/bars", function(req, res){
+  geocoder.geocode(req.body.address, function(err, geocode) {
+    
+    var newBar = new Bar();
+    newBar.name = req.body.name;
+    newBar.address = req.body.address;
+    newBar.description = req.body.description;
+    newBar.image = req.body.image;
+    newBar.facebook_url = req.body.facebook_url;
+
+    newBar.lat = parseFloat(geocode[0].latitude);
+    newBar.lng = parseFloat(geocode[0].longitude);
+
+    newBar.save(function(err, bar){
+      if(err){
+        res.send(err)
+      } else {
+        console.log(bar);
+        res.json(bar)
+      }
+    });
   });
-})
+});
 
 // UPDATE
 app.post('/bars/:id', function(req, res){
@@ -159,8 +175,9 @@ app.get('/logout', function(req, res){
 
 // DATA
 // var u1 = new User({
-//     email: 'dami@dami.com',
-//     firstName: 'Dami'
+//     email: 'emily@emily.com',
+//     firstName: 'Emily',
+//     lastName: 'Isacke'
 // });
 
 // u1.save(function(err){
@@ -169,9 +186,12 @@ app.get('/logout', function(req, res){
 // });
 
 // var b1 = new Bar({
-//     name: "Sushisamba",
-//     address: "110 Bishopsgate, EC2N 4AY",
-//     image: "http://assets.londonist.com/uploads/2015/04/i640/sushisamba-terrace.jpg"
+//     name: "Radio Rooftop Bar",
+//     address: "336-337 Strand, WC2R 1HA",
+//     lat: 51.511913,
+//     lng: -0.118505,
+//     description: "Set atop the ME London hotel, Radio bar — so called because it’s on the site of the old Marconi House — is a sleek asymmetric treat for the eyes in itself.",
+//     image: "http://assets.londonist.com/uploads/2015/04/i640/radio-rooftop.jpg"
 // });
 
 // b1.save(function(err){

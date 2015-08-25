@@ -1,9 +1,9 @@
 // $(function(){
 //   var map;
 //   var infowindow;
-//   function addInfoWindowForCamera(club, marker){
+//   function addInfoWindowForCamera(bar, marker){
 //     google.maps.event.addListener(marker, 'click', function() {
-//       file = club.image;
+//       file = bar.image;
 //       if(infowindow != undefined) infowindow.close()
 //       infowindow = new google.maps.InfoWindow({
 //           content: "<img src='"file"'"
@@ -13,22 +13,22 @@
 //     });
 //   }
 
-//   function createMarkerForCamera(club){
+//   function createMarkerForCamera(bar){
       
-//       var latlng = new google.maps.LatLng(club.address);
+//       var latlng = new google.maps.LatLng(bar.address);
 //       marker = new google.maps.Marker({
 //         position: latlng,
 //         map: map,
 //         title:"Hello World!",
 //       });
-//       addInfoWindowForCamera(club, marker)
+//       addInfoWindowForCamera(bar, marker)
 //   }
 
 
-//   function mapCameras(clubs){
-//     $.each(clubs, function(i, club){
+//   function mapCameras(bars){
+//     $.each(bars, function(i, bar){
       
-//       createMarkerForCamera(club)
+//       createMarkerForCamera(bar)
 //     })
 //   }
 
@@ -78,27 +78,27 @@ function initialize() {
   //       '</div>'+
   //       '</div>';
 
-  var ajax = $.get('http://localhost:9000/')
+  var ajax = $.get('http://localhost:3000/bars')
   .done(function(data){
-    $.each(data, function(index, club){
-      console.log(club.name);
-      console.log(club.lat);
-      console.log(club.lng);
+    $.each(data, function(index, bar){
+      console.log(bar.name);
+      console.log(bar.lat);
+      console.log(bar.lng);
       var marker = new google.maps.Marker({
-          position: {lat: club.lat, lng: club.lng},
+          position: {lat: bar.lat, lng: bar.lng},
           map: map,
-          title: club.name
+          title: bar.name
         });
       var infowindow = new google.maps.InfoWindow({
           content: '<div id="content">'+
           '<div id="siteNotice">'+
           '</div>'+
-          '<h2 id="firstHeading" class="firstHeading">' + club.name + '</h2>'+
+          '<h2 id="firstHeading" class="firstHeading">' + bar.name + '</h2>'+
           '<div id="bodyContent">'+
-          '<img src="' + club.image + '" height="200px">' +
-          '<p>' + club.description + '</p>' +
-          '<a href="' + club.facebook_url + '" target="_blank">Facebook</a><br>' +
-          '<a href="https://citymapper.com/directions?endcoord=' + club.lat + ',' + club.lng + '&endname=' + club.name +'" target="_blank">Get There</a>' +
+          '<img src="' + bar.image + '" height="200px">' +
+          '<p>' + bar.description + '</p>' +
+          '<a href="' + bar.facebook_url + '" target="_blank">Facebook</a><br>' +
+          '<a href="https://citymapper.com/directions?endcoord=' + bar.lat + ',' + bar.lng + '&endname=' + bar.name +'" target="_blank">Get There</a>' +
           '</div>'+
           '</div>'
         });
