@@ -25,7 +25,8 @@ function createUser(req, res){
 function updateUser(req, res){
   User.update({_id: req.params.id}, {
     email: req.body.email, 
-    firstName: req.body.firstName
+    firstName: req.body.firstName,
+    lastName: req.body.lastName
   }, function(err, user){
     if(err){
       res.send(err)

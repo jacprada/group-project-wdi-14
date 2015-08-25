@@ -52,8 +52,11 @@ function createBar(req, res){
 
 function updateBar(req, res){
   Bar.update({_id: req.params.id}, {
-    email: req.body.email, 
-    firstName: req.body.firstName
+    name: req.body.name,
+    address: req.body.address,
+    description: req.body.description,
+    image: req.body.image,
+    facebook_url: req.body.facebook_url
   }, function(err, bar){
     if(err){
       res.send(err)
