@@ -1,8 +1,10 @@
 var express = require('express');
+var cors = require('cors');
 var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var app = express();
+var geocoder = require('node-geocoder');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -11,11 +13,18 @@ var cookieParser = require("cookie-parser");
 var methodOverride = require("method-override");
 
 var jwt    = require('jsonwebtoken');
-var config = require('./config'); 
+var config = require('./config');
+
+var geocoderProvider = 'google';
+var httpAdapter = 'https';
+var extra = {
+  apiKey: process.env.GOOGLE_GEOCODER_API_KEY,
+  formatter: null
+};
+var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 
 mongoose.connect(config.database); // connect to database
 app.set('superSecret', config.secret); // secret variable
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -33,24 +42,22 @@ app.use(expressSession({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(logger('dev'));
+app.use(cors());
+
 
 app.listen(3000);
 
 var User = require('./models/user');
 var Bar = require('./models/bar');
 
-app.get('/', function(req, res) {
-    res.send('Hello! The API is at http://localhost:3000/');
-});
-
 app.get('/setup', function(req, res) {
 
   // create a sample user
   var u1 = new User({
-      email: 'emily@emily.com',
-      firstName: 'Emily',
-      lastName: 'Isacke',
-      password: 'password'
+    email: 'emily@emily.com',
+    firstName: 'Emily',
+    lastName: 'Isacke',
+    password: 'password'
   });
 
   // save the sample user
@@ -63,7 +70,7 @@ app.get('/setup', function(req, res) {
 });
 
 // route to authenticate a user
-app.post('/authenticate', function(req, res) {
+app.post('/login', function(req, res) {
 
   // find the user
   User.findOne({
@@ -125,8 +132,8 @@ app.use(function(req, res, next) {
     // if there is no token
     // return an error
     return res.status(403).send({ 
-        success: false, 
-        message: 'No token provided.' 
+      success: false, 
+      message: 'No token provided.' 
     });
     
   }
@@ -196,11 +203,11 @@ app.delete('/users/:id', function(req, res){
 
 app.get('/bars', function(req, res){
   Bar.find({})
-    .populate('_creator')
-    .exec(function (err, bars) {
-      if (err) return handleError(err);
-      res.json(bars);
-    });
+  .populate('_creator')
+  .exec(function (err, bars) {
+    if (err) return handleError(err);
+    res.json(bars);
+  });
 });
 
 // SHOW
@@ -222,6 +229,15 @@ app.get('/bars/:id', function(req, res){
 });
 
 // CREATE
+
+// app.post('/bars', function(req, res){
+//   Bar.create(req.body, function(err, bar){
+//     if(err) console.log(err);
+//     res.json(bar);
+//     console.log(bar)
+//   });
+// });
+
 app.post("/bars", function(req, res){
   geocoder.geocode(req.body.address, function(err, geocode) {
     
@@ -278,10 +294,10 @@ require("./config/passport")(passport, FacebookStrategy)
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
 
 app.get('/auth/facebook/callback', passport.authenticate('facebook',
-  {
-    successRedirect: '/',
-    failureRedirect: '/'
-  })
+{
+  successRedirect: '/',
+  failureRedirect: '/'
+})
 );
 
 app.get('/logout', function(req, res){
@@ -291,7 +307,7 @@ app.get('/logout', function(req, res){
 
 // DATA
 // var u1 = new User({
-//     email: 'emily@emily.com',
+//     email: 'emily@emily.com',1
 //     firstName: 'Emily',
 //     lastName: 'Isacke'
 // });
