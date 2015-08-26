@@ -29,19 +29,21 @@ $(function(){
       location.reload();
     });
   });
+
   $("#check").on("click", function(){
-      event.preventDefault();
-      $.ajax({
-        type: "get",
-        url: $(this).attr("href"),
-        dataType: "json",
-        beforeSend: function(request){
-          checkAccess(request)
-        },
-      }).done(function(data, response){
-        console.log(data);
-      });
+    event.preventDefault();
+    $.ajax({
+      type: "get",
+      url: $(this).attr("href"),
+      dataType: "json",
+      beforeSend: function(request){
+        checkAccess(request)
+      },
+    }).done(function(data, response){
+      console.log(data);
     });
+  });
+
   $("#logout_link").on("click", function(){
     event.preventDefault();
     localStorage.removeItem("access_token");

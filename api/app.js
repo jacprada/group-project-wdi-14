@@ -53,13 +53,6 @@ app.post('/signup', function(req, res) {
   });
 });
 
-app.get('/me', function(req, res){
-  User.findById(req.decoded._id, function(err, user){
-    if (err) console.log(err);
-    res.json(user);
-  });
-});
-
 // route to authenticate a user
 app.post('/login', function(req, res) {
   User.findOne({
