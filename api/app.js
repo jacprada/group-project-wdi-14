@@ -5,7 +5,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var app = express();
 var geocoder = require('node-geocoder');
-var FacebookStrategy = require('passport-facebook').Strategy;
+// var FacebookStrategy = require('passport-facebook').Strategy;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var expressSession = require('express-session');
@@ -289,21 +289,21 @@ app.delete('/bars/:id', function(req, res){
 
 // FACEBOOK
 
-require("./config/passport")(passport, FacebookStrategy)
+// require("./config/passport")(passport, FacebookStrategy)
 
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
+// app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
 
-app.get('/auth/facebook/callback', passport.authenticate('facebook',
-{
-  successRedirect: '/',
-  failureRedirect: '/'
-})
-);
+// app.get('/auth/facebook/callback', passport.authenticate('facebook',
+// {
+//   successRedirect: '/',
+//   failureRedirect: '/'
+// })
+// );
 
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
+// app.get('/logout', function(req, res){
+//   req.logout();
+//   res.redirect('/');
+// });
 
 // DATA
 // var u1 = new User({
