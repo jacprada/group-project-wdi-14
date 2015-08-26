@@ -1,4 +1,15 @@
 $(function(){
+
+  if (localStorage.getItem("access_token") === null) {
+    console.log("key does not exist")
+    $("#dynamic_ul").append("<li><a id='check' href='http://localhost:3000/bars'>Bars</a></li>")
+    $("#dynamic_ul").append("<li><a id='logout_link' href='#'>Logout</a></li>")
+  } else {
+    console.log("key exists")
+    $("#dynamic_ul").append("<li><a href=''>Logout</a></li>")
+    $("#dynamic_ul").append("<li><a href=''>Logout</a></li>")
+  }
+
   $("form#login").on("submit", function(){
     event.preventDefault();
     $.ajax({
@@ -19,7 +30,7 @@ $(function(){
     });
   });
 
-  $("#about_button").on("click", function(){
+  $("#login_button").on("click", function(){
     event.preventDefault();
     $("#login").toggle();
   });
@@ -29,4 +40,5 @@ $(function(){
     localStorage.removeItem("access_token");
     $("#map").fadeOut().empty();
   })
+
 });

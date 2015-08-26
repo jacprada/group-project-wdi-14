@@ -13,7 +13,7 @@
 </head>
 <body>
   <!-- Testing authentication -->
-  <a class="check" href="http://localhost:3000/bars">Test</a>
+  <a id="check" href="http://localhost:3000/bars">Test</a>
 
   <!-- Removing Jwt from LocalStorage -->
   <a class="logout" href="#">Logout</a>
@@ -41,16 +41,16 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="#">Get In</a>
+          <a id="login_button" href="">Get In</a>
           <ul class="dropdown">
-            <li><a id="login_button" href="#">Login</a></li>
+            <li><a id="login_button" href="">Login</a></li>
             <li><a href="#">Sign Up</a></li>
           </ul>
         </li>
       </ul>
 
       <!-- Left Nav Section -->
-      <ul class="left">
+      <ul id="dynamic_ul" class="left">
         <li><a id="about_button" href="">About</a></li>
         <li><a id="home_button" href="#">Bars</a></li>
       </ul>
