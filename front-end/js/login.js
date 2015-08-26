@@ -33,7 +33,7 @@ $(function(){
 
   $("#about_button").on("click", function(){
     event.preventDefault();
-    $("#map").prepend("<h1>Hello Mama</h1>");
+    $("body").prepend("<h1>Hello Mama</h1>");
   });
 
   $(".logout").on("click", function(){
