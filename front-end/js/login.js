@@ -1,4 +1,5 @@
 $(function(){
+
   if (localStorage.getItem("access_token") === null) {
     console.log("key does not exist")
     $("#dynamic_ul").append("<li><a id='login_button' href='#'>Login</a></li>")
@@ -56,4 +57,3 @@ $(function(){
     $("#login").toggle();
   });
 });
-Add Comment
