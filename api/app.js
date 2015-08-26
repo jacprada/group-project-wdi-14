@@ -4,12 +4,12 @@ var path              = require('path');
 var logger            = require('morgan');
 var bodyParser        = require('body-parser');
 var app               = express();
-// var FacebookStrategy  = require('passport-facebook').Strategy;
 var mongoose          = require('mongoose');
 var passport          = require('passport');
 var cookieParser      = require("cookie-parser");
 var methodOverride    = require("method-override");
 var jwt               = require('jsonwebtoken');
+var expressJWT        = require('express-jwt'); 
 var config            = require('./config');
 var User              = require('./models/user');
 
@@ -28,30 +28,40 @@ app.use(methodOverride(function(req, res){
 }));
 
 app.use(cookieParser());
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(logger('dev'));
 app.use(cors());
 
-app.get('/setup', function(req, res) {
-  // create a sample user
-  var u1 = new User({
-    email: 'emily@emily.com',
-    firstName: 'Emily',
-    lastName: 'Isacke',
-    password: 'password'
+// passport.initialize() middleware is required to initialize Passport. 
+app.use(passport.initialize());
+
+// app.use(flash()); 
+
+require('./config/passport')(passport);
+
+// app.use(function(req, res, next) {
+//   global.user = req.user;
+//   next();
+// })
+
+app.post('/signup', function(req, res) {
+  passport.authenticate('local-signup', {
+    successRedirect : '/bars',
+    failureRedirect : '/users',
+    failureFlash : true
+  })(req, res, function(){
+    res.redirect('/bars');
   });
-  // save the sample user
-  u1.save(function(err) {
-    if (err) throw err;
-    console.log('User saved successfully');
-    res.json({ success: true });
+});
+
+app.get('/me', function(req, res){
+  User.findById(req.decoded._id, function(err, user){
+    if (err) console.log(err);
+    res.json(user);
   });
 });
 
 // route to authenticate a user
 app.post('/login', function(req, res) {
-  // find the user
   User.findOne({
     email: req.body.email
   }, function(err, user) {
@@ -59,16 +69,12 @@ app.post('/login', function(req, res) {
     if (!user) {
       res.json({ success: false, message: 'Authentication failed. User not found.' });
     } else if (user) {
-      // check if password matches
-      if (user.password != req.body.password) {
+      if (!user.validPassword(req.body.password)) {
         res.json({ success: false, message: 'Authentication failed. Wrong password.' });
       } else {
-        // if user is found and password is right
-        // create a token
         var token = jwt.sign(user, app.get('superSecret'), {
           expiresInMinutes: 1440 // expires in 24 hours
         });
-        // return the information including token as JSON
         res.json({
           success: true,
           message: 'Enjoy your token!',
@@ -92,7 +98,7 @@ app.use(function(req, res, next) {
         return res.json({ success: false, message: 'Failed to authenticate token.' });    
       } else {
         // if everything is good, save to request for use in other routes
-        req.decoded = decoded;    
+        req.decoded = decoded;
         next();
       }
     });
@@ -106,25 +112,18 @@ app.use(function(req, res, next) {
   }
 });
 
+// app.use('/', expressJWT({secret: config.secret}));
+
+// app.get('/bars',
+//   expressJWT({secret: config.secret}),
+//   function(req, res) {
+//     if (!req.user) return res.send(401);
+//     res.send(200);
+//     console.log("accessed")
+//   });
+
+
 var routes = require('./config/routes');
 app.use(routes);
 
 app.listen(3000);
-
-// FACEBOOK
-
-// require("./config/passport")(passport, FacebookStrategy)
-
-// app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
-
-// app.get('/auth/facebook/callback', passport.authenticate('facebook',
-// {
-//   successRedirect: '/',
-//   failureRedirect: '/'
-// })
-// );
-
-// app.get('/logout', function(req, res){
-//   req.logout();
-//   res.redirect('/');
-// });

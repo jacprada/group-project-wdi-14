@@ -9,7 +9,6 @@ $(function(){
     $("#dynamic_ul").append("<li><a id='check' href='http://localhost:3000/bars'>Bars</a></li>")
     $("#dynamic_ul").append("<li><a id='logout_link' href='#'>Logout</a></li>")
   }
-
   $("form#login").on("submit", function(){
     event.preventDefault();
     $.ajax({
@@ -32,7 +31,6 @@ $(function(){
       // location.reload();
     });
   });
-
   $("#check").on("click", function(){
       event.preventDefault();
       $.ajax({
@@ -46,22 +44,18 @@ $(function(){
         console.log(data);
       });
     });
-
   $("#logout_link").on("click", function(){
     event.preventDefault();
     localStorage.removeItem("access_token");
     $("#map").fadeOut().empty();
     location.reload();
   })
-
   $("#signup_button").on("click", function(){
     event.preventDefault();
     $("#signup").toggle();
   });
-
   $("#login_button").on("click", function(){
     event.preventDefault();
     $("#login").toggle();
   });
-
 });

@@ -12,14 +12,11 @@
   <script src="../js/login.js"></script>
 </head>
 <body>
-
   <!-- Testing authentication -->
 <!--   <a id="check" href="http://localhost:3000/bars">Test</a>
  -->
   <!-- Removing Jwt from LocalStorage -->
 <!--   <a class="logout" href="#">Logout</a> -->
-
-
   <nav class="top-bar" data-topbar role="navigation">
     <ul class="title-area">
       <li class="name">
@@ -28,7 +25,6 @@
       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
       <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
     </ul>
-
     <section class="top-bar-section">
       <!-- Right Nav Section -->
       <ul class="right">
@@ -49,20 +45,17 @@
           </ul>
         </li>
       </ul>
-
       <!-- Left Nav Section -->
       <ul id="dynamic_ul" class="left">
         <li><a id="about_button" href="">About</a></li>
       </ul>
     </section>
   </nav>
-
   <form id="login" action="http://localhost:3000/login" method="post">
     <input class="email" type="text" name="email" placeholder="Email">
     <input class="password" type="password" name="password" placeholder="Password">
     <input type="submit" value="Login">
   </form>
-
   <form id="signup" action="http://localhost:3000/signup" method="post">
     <input class="signup_email" type="text" name="email" placeholder="Email">
     <input class="signup_password" type="password" name="password" placeholder="Password">
@@ -70,7 +63,6 @@
     <input class="signup_lastName" type="text" name="lastName" placeholder="Last Name">
     <input type="submit" value="Signup">
   </form>
-
   <div id="map"></div>
 </body>
 </html>

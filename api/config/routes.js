@@ -3,14 +3,14 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 // Used to manipulate POST methods
 var methodOverride = require('method-override');
+var passport = require("passport");
 var usersController = require('../controllers/user');
 var barsController = require('../controllers/bar');
 
-// FOR FACEBOOK - CAN DELETE?
-// function authenticatedUser(req, res, next) {
-//   if (req.isAuthenticated()) return next();
-//   res.redirect('/');
-// }
+function authenticatedUser(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  res.redirect('/');
+}
 
 router.route('/users')
   .get(usersController.indexUsers)
