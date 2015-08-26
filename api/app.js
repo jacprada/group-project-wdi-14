@@ -37,15 +37,15 @@ app.use(passport.initialize());
 
 require('./config/passport')(passport);
 
-app.use(function(req, res, next) {
-  global.user = req.user;
-  next();
-})
+// app.use(function(req, res, next) {
+//   global.user = req.user;
+//   next();
+// })
 
 app.post('/signup', function(req, res) {
   passport.authenticate('local-signup', {
     successRedirect : '/bars',
-    failureRedirect : '/Users/emilyisacke/DWI/group-project-wdi-14/front-end/views/index.html',
+    failureRedirect : '/users',
     failureFlash : true
   })(req, res, function(){
     res.redirect('/bars');
@@ -63,7 +63,7 @@ app.post('/login', function(req, res) {
       res.json({ success: false, message: 'Authentication failed. User not found.' });
     } else if (user) {
       // check if password matches
-      if (user.password != req.body.password) {
+      if (!user.validPassword(req.body.password)) {
         res.json({ success: false, message: 'Authentication failed. Wrong password.' });
       } else {
         // if user is found and password is right

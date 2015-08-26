@@ -10,7 +10,6 @@ $(function(){
       },
       dataType: "json",
     }).done(function(data, response) {
-      // console.log(data, response);
       var access_token = data.token;
       localStorage.setItem("access_token", access_token);
       location.reload();
