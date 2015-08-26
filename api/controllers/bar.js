@@ -28,7 +28,6 @@ function showBar(req, res){
 
 function createBar(req, res){
   geocoder.geocode(req.body.address, function(err, geocode) {
-
     var newBar = new Bar();
     newBar.name = req.body.name;
     newBar.address = req.body.address;
