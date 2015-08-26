@@ -214,8 +214,9 @@ function initialize() {
         position: {lat: bar.lat, lng: bar.lng},
         map: map,
         title: bar.name,
-        icon: "http://i.imgur.com/jcZ8P11.png"
+        icon: "http://i.imgur.com/aWWkcX1.png"
       });
+      
       // Setting up info window based on json bar (name, image, description, facebook) data
       // Adding Citymapper link with pre-saved adddress
       var infowindow = new google.maps.InfoWindow({
