@@ -8,3 +8,11 @@
   width: 400px;
   text-align: center;
 }
+
+#login {
+  display: none;
+}
+
+#signup {
+  display: none;
+}

@@ -1,6 +1,7 @@
 $(document).ready(function(){
   initialize();
 });
+var infowindow
 
 function initialize() {
 
@@ -19,171 +20,171 @@ function initialize() {
 
   // Adding array of styles
   var styles = [
+  {
+    "featureType": "all",
+    "elementType": "labels.text.fill",
+    "stylers": [
     {
-        "featureType": "all",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "saturation": 36
-            },
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 40
-            }
-        ]
+        "saturation": 36
     },
     {
-        "featureType": "all",
-        "elementType": "labels.text.stroke",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 16
-            }
-        ]
+        "color": "#000000"
     },
     {
-        "featureType": "all",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 20
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 17
-            },
-            {
-                "weight": 1.2
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 20
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 21
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 17
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 29
-            },
-            {
-                "weight": 0.2
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 18
-            }
-        ]
-    },
-    {
-        "featureType": "road.local",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 16
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 19
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 17
-            }
-        ]
+        "lightness": 40
     }
+    ]
+},
+{
+    "featureType": "all",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+    {
+        "visibility": "on"
+    },
+    {
+        "color": "#000000"
+    },
+    {
+        "lightness": 16
+    }
+    ]
+},
+{
+    "featureType": "all",
+    "elementType": "labels.icon",
+    "stylers": [
+    {
+        "visibility": "off"
+    }
+    ]
+},
+{
+    "featureType": "administrative",
+    "elementType": "geometry.fill",
+    "stylers": [
+    {
+        "color": "#000000"
+    },
+    {
+        "lightness": 20
+    }
+    ]
+},
+{
+    "featureType": "administrative",
+    "elementType": "geometry.stroke",
+    "stylers": [
+    {
+        "color": "#000000"
+    },
+    {
+        "lightness": 17
+    },
+    {
+        "weight": 1.2
+    }
+    ]
+},
+{
+    "featureType": "landscape",
+    "elementType": "geometry",
+    "stylers": [
+    {
+        "color": "#000000"
+    },
+    {
+        "lightness": 20
+    }
+    ]
+},
+{
+    "featureType": "poi",
+    "elementType": "geometry",
+    "stylers": [
+    {
+        "color": "#000000"
+    },
+    {
+        "lightness": 21
+    }
+    ]
+},
+{
+    "featureType": "road.highway",
+    "elementType": "geometry.fill",
+    "stylers": [
+    {
+        "color": "#000000"
+    },
+    {
+        "lightness": 17
+    }
+    ]
+},
+{
+    "featureType": "road.highway",
+    "elementType": "geometry.stroke",
+    "stylers": [
+    {
+        "color": "#000000"
+    },
+    {
+        "lightness": 29
+    },
+    {
+        "weight": 0.2
+    }
+    ]
+},
+{
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [
+    {
+        "color": "#000000"
+    },
+    {
+        "lightness": 18
+    }
+    ]
+},
+{
+    "featureType": "road.local",
+    "elementType": "geometry",
+    "stylers": [
+    {
+        "color": "#000000"
+    },
+    {
+        "lightness": 16
+    }
+    ]
+},
+{
+    "featureType": "transit",
+    "elementType": "geometry",
+    "stylers": [
+    {
+        "color": "#000000"
+    },
+    {
+        "lightness": 19
+    }
+    ]
+},
+{
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+    {
+        "color": "#000000"
+    },
+    {
+        "lightness": 17
+    }
+    ]
+}
 ]
 
   // Create a new StyledMapType object, passing it the array of styles, ***
@@ -219,23 +220,26 @@ function initialize() {
       
       // Setting up info window based on json bar (name, image, description, facebook) data
       // Adding Citymapper link with pre-saved adddress
-      var infowindow = new google.maps.InfoWindow({
-        content: '<div id="content">'+
-        '<div id="siteNotice">'+
-        '</div>'+
-        '<h2 id="firstHeading" class="firstHeading">' + bar.name + '</h2>'+
-        '<div id="bodyContent">'+
-        '<img src="' + bar.image + '" height="200px">' +
-        '<p>' + bar.description + '</p>' +
-        '<a href="' + bar.facebook_url + '" target="_blank">Facebook</a><br>' +
-        '<a href="https://citymapper.com/directions?endcoord='
-        + bar.lat + ',' + bar.lng + '&endname=' + bar.name +'" target="_blank">Get There</a>' +
-        '</div>'+
-        '</div>'
-      });
 
       // Adding click listener to open info window when marker is clicked
       marker.addListener('click', function() {
+        if(infowindow) {
+            infowindow.close()
+        }
+        infowindow = new google.maps.InfoWindow({
+          content: '<div id="content">'+
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h2 id="firstHeading" class="firstHeading">' + bar.name + '</h2>'+
+          '<div id="bodyContent">'+
+          '<img src="' + bar.image + '" height="200px">' +
+          '<p>' + bar.description + '</p>' +
+          '<a href="' + bar.facebook_url + '" target="_blank">Facebook</a><br>' +
+          '<a href="https://citymapper.com/directions?endcoord='
+          + bar.lat + ',' + bar.lng + '&endname=' + bar.name +'" target="_blank">Get There</a>' +
+          '</div>'+
+          '</div>'
+        });
         map.setCenter(marker.getPosition());
         infowindow.open(map, marker);
       });
