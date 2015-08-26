@@ -43,7 +43,7 @@
         <li class="has-dropdown">
           <a href="#">Get In</a>
           <ul class="dropdown">
-            <li><a href="#">Login</a></li>
+            <li><a id="login_button" href="#">Login</a></li>
             <li><a href="#">Sign Up</a></li>
           </ul>
         </li>
@@ -57,12 +57,12 @@
     </section>
   </nav>
 
-  <div id="login_form"></div>
   <form id="login" action="http://localhost:3000/login" method="post">
     <input class="email" type="text" name="email" placeholder="Email">
     <input class="password" type="password" name="password" placeholder="Password">
     <input type="submit" value="Login">
   </form>
+
   <div id="map"></div>
 </body>
 </html>
