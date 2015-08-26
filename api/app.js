@@ -11,6 +11,7 @@ var cookieParser      = require("cookie-parser");
 var methodOverride    = require("method-override");
 var jwt               = require('jsonwebtoken');
 var config            = require('./config');
+var User              = require('./models/user');
 
 mongoose.connect(config.database);
 app.set('superSecret', config.secret);
@@ -31,11 +32,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(logger('dev'));
 app.use(cors());
-
-var User            = require('./models/user');
-var Bar             = require('./models/bar');
-var userController  = require('./controllers/user');
-var barController   = require('./controllers/bar');
 
 app.get('/setup', function(req, res) {
   // create a sample user
