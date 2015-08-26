@@ -25,7 +25,6 @@ $(function(){
       // console.log(data, response);
       console.log(data)
       var user_id = data.user._id
-      console.log("Your ID is " + user_id)
       var access_token = data.token;
       localStorage.setItem("access_token", access_token);
       localStorage.setItem("access_id", user_id);
