@@ -10,8 +10,6 @@ module.exports = function(passport) {
     passwordField : 'password',
     passReqToCallback : true
   }, function(req, email, password, done) {
-    console.log(email);
-    console.log(password);
     //  process.nextTick() actually does is defer the execution of an action till the next pass around the event loop.
     // http://howtonode.org/understanding-process-next-tick 
     process.nextTick(function() {
@@ -27,12 +25,13 @@ module.exports = function(passport) {
         // There is no email registered with this email
 
           // Create a new user
-          var newUser      = new User();
-          newUser.email    = email;
-          newUser.password = newUser.encrypt(password);
+          var newUser       = new User();
+          newUser.email     = email;
+          newUser.password  = newUser.encrypt(password);
+          newUser.firstName = req.body.firstName;
+          newUser.lastName  = req.body.lastName;
 
           newUser.save(function(err) {
-            console.log(newUser);
             if (err) throw err;
             return done(null, newUser);
           });

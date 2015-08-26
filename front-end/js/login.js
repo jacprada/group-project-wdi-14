@@ -26,7 +26,7 @@ $(function(){
         checkAccess(request)
       },
     }).done(function(data, response){
-      console.log(data);
+      // console.log(data);
     });
   });
 

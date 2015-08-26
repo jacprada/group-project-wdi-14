@@ -9,6 +9,7 @@ var passport          = require('passport');
 var cookieParser      = require("cookie-parser");
 var methodOverride    = require("method-override");
 var jwt               = require('jsonwebtoken');
+var expressJWT        = require('express-jwt'); 
 var config            = require('./config');
 var User              = require('./models/user');
 
@@ -52,9 +53,15 @@ app.post('/signup', function(req, res) {
   });
 });
 
+app.get('/me', function(req, res){
+  User.findById(req.decoded._id, function(err, user){
+    if (err) console.log(err);
+    res.json(user);
+  });
+});
+
 // route to authenticate a user
 app.post('/login', function(req, res) {
-  // find the user
   User.findOne({
     email: req.body.email
   }, function(err, user) {
@@ -62,20 +69,17 @@ app.post('/login', function(req, res) {
     if (!user) {
       res.json({ success: false, message: 'Authentication failed. User not found.' });
     } else if (user) {
-      // check if password matches
       if (!user.validPassword(req.body.password)) {
         res.json({ success: false, message: 'Authentication failed. Wrong password.' });
       } else {
-        // if user is found and password is right
-        // create a token
         var token = jwt.sign(user, app.get('superSecret'), {
           expiresInMinutes: 1440 // expires in 24 hours
         });
-        // return the information including token as JSON
         res.json({
           success: true,
           message: 'Enjoy your token!',
-          token: token
+          token: token,
+          user: user
         });
       }   
     }
@@ -94,7 +98,7 @@ app.use(function(req, res, next) {
         return res.json({ success: false, message: 'Failed to authenticate token.' });    
       } else {
         // if everything is good, save to request for use in other routes
-        req.decoded = decoded;    
+        req.decoded = decoded;
         next();
       }
     });
@@ -107,6 +111,17 @@ app.use(function(req, res, next) {
     }); 
   }
 });
+
+// app.use('/', expressJWT({secret: config.secret}));
+
+// app.get('/bars',
+//   expressJWT({secret: config.secret}),
+//   function(req, res) {
+//     if (!req.user) return res.send(401);
+//     res.send(200);
+//     console.log("accessed")
+//   });
+
 
 var routes = require('./config/routes');
 app.use(routes);
