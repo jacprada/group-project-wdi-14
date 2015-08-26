@@ -42,20 +42,12 @@ app.use(function(req, res, next) {
   next();
 })
 
-app.get('/setup', function(req, res) {
-  // create a sample user
-  var u1 = new User({
-    email: 'emily@emily.com',
-    firstName: 'Emily',
-    lastName: 'Isacke',
-    password: 'password'
-  });
-  // save the sample user
-  u1.save(function(err) {
-    if (err) throw err;
-    console.log('User saved successfully');
-    res.json({ success: true });
-  });
+app.post('/signup', function(req, res) {
+  passport.authenticate('local-signup', {
+    successRedirect : 'http://www.google.com',
+    failureRedirect : '/users',
+    failureFlash : true
+  })(req, res);
 });
 
 // route to authenticate a user

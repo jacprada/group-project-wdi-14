@@ -6,7 +6,6 @@ var methodOverride = require('method-override');
 var passport = require("passport");
 var usersController = require('../controllers/user');
 var barsController = require('../controllers/bar');
-var signupController = require('../controllers/signup');
 
 function authenticatedUser(req, res, next) {
   if (req.isAuthenticated()) return next();
@@ -30,8 +29,5 @@ router.route('/bars/:id')
   .get(barsController.showBar)
   .put(barsController.updateBar)
   .delete(barsController.deleteBar)
-
-router.route('/signup')
-  .post(signupController.postSignup)
 
 module.exports = router
