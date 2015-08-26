@@ -1,49 +1,68 @@
-// var User = require('../models/user');
-// var FacebookStrategy = require('passport-facebook').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
+var User          = require("../models/user");
 
-// module.exports = function(passport) {
+// In app.js require('./config/passport')(passport) is expecting a function
+module.exports = function(passport) {
 
-//   passport.serializeUser(function(user, done) {
-//     done(null, user._id);
-//   });
+  passport.use('local-signup', new LocalStrategy({
+    usernameField : 'email',
+    passwordField : 'password',
+    passReqToCallback : true
+  }, function(req, email, password, done) {
+    //  process.nextTick() actually does is defer the execution of an action till the next pass around the event loop.
+    // http://howtonode.org/understanding-process-next-tick 
+    process.nextTick(function() {
 
-//   passport.deserializeUser(function(id, done) {
-//     User.findById(id, function(err, user) {
-//       console.log('deserializing user:',user);
-//       done(err, user);
-//     });
-//   });
+      // Find a user with this e-mail
+      User.findOne({ 'local.email' :  email }, function(err, user) {
+        if (err) return done(err);
 
-//   passport.use('facebook', new FacebookStrategy({
-//     clientID        : process.env.FACEBOOK_BAR_API_KEY,
-//     clientSecret    : process.env.FACEBOOK_BAR_API_SECRET,
-//     callbackURL     : 'http://localhost:3000/auth/facebook/callback',
-//     enableProof     : true,
-//     profileFields   : ['name', 'emails']
-//   }, function(access_token, refresh_token, profile, done) {
+        // If there already is a user with this email 
+        if (user) {
+          return done(null, false, req.flash('signupMessage', 'This email is already used.'));
+        } else {
+        // There is no email registered with this email
 
-//     console.log(profile)
-//     process.nextTick(function() {
+          // Create a new user
+          var newUser            = new User();
+          newUser.local.email    = email;
+          newUser.local.password = newUser.encrypt(password);
 
-//       User.findOne({ 'id' : profile.id }, function(err, user) {
-//         if (err) return done(err);
-//         if (user) {
-//           return done(null, user);
-//         } else {
+          newUser.save(function(err) {
+            if (err) throw err;
+            return done(null, newUser);
+          });
+        }
+      });
+    });
+  }));
 
-//           var newUser = new User();
+  // passport.use('local-login', new LocalStrategy({
+  //   usernameField : 'email',
+  //   passwordField : 'password',
+  //   passReqToCallback : true
+  // }, function(req, email, password, done){
 
-//           newUser.id           = profile.id;
-//           newUser.access_token = access_token;
-//           newUser.firstName    = profile.name.givenName;
-//           newUser.lastName     = profile.name.familyName;
-//           newUser.email        = profile.emails[0].value;
-//           newUser.save(function(err) {
-//             if (err) throw err;
-//             return done(null, newUser);
-//           });
-//         };
-//       });
-//     });
-//   }));
-// }
+  //   // Search for a user with an email from the login form
+  //   User.findOne({ 'local.email' : email }, function(err, user) {
+  //     // If an exception occurred while verifying the credentials (for example, if the database is not available), done should be invoked with an error, in conventional Node style.
+  //     if (err) { return done(err) };
+
+  //     // If no user has been found
+  //     if (!user) {
+  //       // Strategies require what is known as a verify callback.
+  //       // If the credentials are not valid (for example, if the password is incorrect), 
+  //       // done should be invoked with false instead of a user to indicate an authentication failure.
+  //       return done(null, false, req.flash('loginMessage', 'Incorrect email.'))
+  //     };
+
+  //     // If password is invalid
+  //     if (!user.validPassword(password)) {
+  //       return done(null, false, req.flash('loginMessage', 'Incorrect password.'));
+  //     } 
+        
+  //     // User has been authenticated, return user
+  //     return done(null, user);
+  //   });
+  // }));
+}

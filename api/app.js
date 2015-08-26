@@ -4,7 +4,6 @@ var path              = require('path');
 var logger            = require('morgan');
 var bodyParser        = require('body-parser');
 var app               = express();
-var FacebookStrategy  = require('passport-facebook').Strategy;
 var mongoose          = require('mongoose');
 var passport          = require('passport');
 var cookieParser      = require("cookie-parser");
@@ -28,10 +27,20 @@ app.use(methodOverride(function(req, res){
 }));
 
 app.use(cookieParser());
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(logger('dev'));
 app.use(cors());
+
+// passport.initialize() middleware is required to initialize Passport. 
+app.use(passport.initialize());
+
+// app.use(flash()); 
+
+require('./config/passport')(passport);
+
+app.use(function(req, res, next) {
+  global.user = req.user;
+  next();
+})
 
 app.get('/setup', function(req, res) {
   // create a sample user
@@ -109,21 +118,3 @@ var routes = require('./config/routes');
 app.use(routes);
 
 app.listen(3000);
-
-// FACEBOOK
-
-// require("./config/passport")(passport, FacebookStrategy)
-
-// app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
-
-// app.get('/auth/facebook/callback', passport.authenticate('facebook',
-// {
-//   successRedirect: '/',
-//   failureRedirect: '/'
-// })
-// );
-
-// app.get('/logout', function(req, res){
-//   req.logout();
-//   res.redirect('/');
-// });
