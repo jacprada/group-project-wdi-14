@@ -22,12 +22,14 @@ $(function(){
       dataType: "json",
     }).done(function(data, response) {
       // console.log(data, response);
-      userData = data.user
+      console.log(data)
       // console.log(userData)
       // console.log("Hello " + userData.firstName)
+      // var user_id = data.user.id
+      // console.log(user_id)
       var access_token = data.token;
       localStorage.setItem("access_token", access_token);
-      location.reload();
+      // location.reload();
     });
   });
 

@@ -4,7 +4,7 @@ var path              = require('path');
 var logger            = require('morgan');
 var bodyParser        = require('body-parser');
 var app               = express();
-var FacebookStrategy  = require('passport-facebook').Strategy;
+// var FacebookStrategy  = require('passport-facebook').Strategy;
 var mongoose          = require('mongoose');
 var passport          = require('passport');
 var cookieParser      = require("cookie-parser");
@@ -72,7 +72,8 @@ app.post('/login', function(req, res) {
         res.json({
           success: true,
           message: 'Enjoy your token!',
-          token: token
+          token: token,
+          user: user
         });
       }   
     }
