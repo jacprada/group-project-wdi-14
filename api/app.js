@@ -44,10 +44,12 @@ app.use(function(req, res, next) {
 
 app.post('/signup', function(req, res) {
   passport.authenticate('local-signup', {
-    successRedirect : 'http://www.google.com',
-    failureRedirect : '/users',
+    successRedirect : '/bars',
+    failureRedirect : '/Users/emilyisacke/DWI/group-project-wdi-14/front-end/views/index.html',
     failureFlash : true
-  })(req, res);
+  })(req, res, function(){
+    res.redirect('/bars');
+  });
 });
 
 // route to authenticate a user
