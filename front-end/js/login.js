@@ -7,8 +7,10 @@ $(function(){
   } else {
     console.log("key exists")
     $("#dynamic_ul").append("<li><a id='check' href='http://localhost:3000/bars'>Bars</a></li>")
+    $("#dynamic_ul").append("<li><a id='profile' href='#'>Profile</a></li>")
     $("#dynamic_ul").append("<li><a id='logout_link' href='#'>Logout</a></li>")
   }
+
   $("form#login").on("submit", function(){
     event.preventDefault();
     $.ajax({
@@ -22,15 +24,15 @@ $(function(){
     }).done(function(data, response) {
       // console.log(data, response);
       console.log(data)
-      // console.log(userData)
-      // console.log("Hello " + userData.firstName)
-      // var user_id = data.user.id
-      // console.log(user_id)
+      var user_id = data.user._id
+      console.log("Your ID is " + user_id)
       var access_token = data.token;
       localStorage.setItem("access_token", access_token);
-      // location.reload();
+      localStorage.setItem("access_id", user_id);
+      location.reload();
     });
   });
+
   $("#check").on("click", function(){
       event.preventDefault();
       $.ajax({
@@ -44,16 +46,37 @@ $(function(){
         console.log(data);
       });
     });
+
+  $("#profile").on("click", function(){
+    var super_id = localStorage.getItem("access_id");
+    console.log("is this the id? " + super_id);
+    event.preventDefault();
+    $.ajax({
+      type: "get",
+      url: "http://localhost:3000/users/" + super_id,
+      dataType: "json",
+      beforeSend: function(request){
+        checkAccess(request)
+      },
+    }).done(function(data, response){
+      console.log(data);
+    });
+  });
+
+
+
   $("#logout_link").on("click", function(){
     event.preventDefault();
     localStorage.removeItem("access_token");
     $("#map").fadeOut().empty();
     location.reload();
   })
+
   $("#signup_button").on("click", function(){
     event.preventDefault();
     $("#signup").toggle();
   });
+
   $("#login_button").on("click", function(){
     event.preventDefault();
     $("#login").toggle();
