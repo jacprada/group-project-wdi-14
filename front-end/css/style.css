@@ -56,6 +56,26 @@
   margin-bottom: 10px;
 }
 
+#brand {
+  font-weight: bold;
+}
+
+.switch label:after {
+  border-radius: 100px;
+}
+
+label {
+  border-radius: 20px;
+}
+
+.gm-style-cc {
+  display:none;
+}
+
+a#switch.switch.tiny {
+  height: 45px;
+}
+
 #weather {
   cursor: default;
 }
