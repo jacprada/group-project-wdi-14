@@ -6,10 +6,20 @@ $(function(){
     $("#dynamic_ul").append("<li><a id='signup_button' href='#'>Signup</a></li>")
   } else {
     console.log("key exists")
-    $("#dynamic_ul").append("<li><a id='check' href='http://localhost:3000/bars'>Bars</a></li>")
-    $("#dynamic_ul").append("<li><a id='profile' href='#'>Profile</a></li>")
-    $("#dynamic_ul").append("<li><a id='logout_link' href='#'>Logout</a></li>")
     $("#dynamic_ul").append("<li><a id='newbar_link' href='#'>Add Bar</a></li>")
+    $("#dynamic_ul").append("<li><a id='logout_link' href='#'>Logout</a></li>")
+    var user_id = localStorage.getItem("access_id");
+    $.ajax({
+      type: "get",
+      url: "http://localhost:3000/users/" + user_id,
+      dataType: "json",
+      beforeSend: function(request){
+        checkAccess(request)
+      },
+    }).done(function(data, response){
+      console.log(data);
+      $("#user_ul").append("<li class='active'><a id='profile_nav'>Hello, " + data.firstName + "</a></li>")
+    });
   }
 
   $("form#login").on("submit", function(){
@@ -95,21 +105,21 @@ $(function(){
       });
     });
 
-  $("#profile").on("click", function(){
-    var super_id = localStorage.getItem("access_id");
-    console.log("is this the id? " + super_id);
-    event.preventDefault();
-    $.ajax({
-      type: "get",
-      url: "http://localhost:3000/users/" + super_id,
-      dataType: "json",
-      beforeSend: function(request){
-        checkAccess(request)
-      },
-    }).done(function(data, response){
-      console.log(data);
-    });
-  });
+  // $("#profile").on("click", function(){
+  //   var super_id = localStorage.getItem("access_id");
+  //   console.log("is this the id? " + super_id);
+  //   event.preventDefault();
+  //   $.ajax({
+  //     type: "get",
+  //     url: "http://localhost:3000/users/" + super_id,
+  //     dataType: "json",
+  //     beforeSend: function(request){
+  //       checkAccess(request)
+  //     },
+  //   }).done(function(data, response){
+  //     console.log(data);
+  //   });
+  // });
 
   $("#logout_link").on("click", function(){
     event.preventDefault();
