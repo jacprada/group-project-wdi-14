@@ -6,7 +6,7 @@ $(function(){
       $("#dynamic_ul").append("<li><a href='#' data-reveal-id='login_div' data-reveal>Login</a></li>")
       $("#dynamic_ul").append("<li><a id='signup_button' href='#' data-reveal-id='signup_div' data-reveal>Signup</a></li>")
       $("#user_ul").prepend("<li><a id='weather' href='#'>London</a></li>")
-      $("#welcome-info").show();
+      $(".welcome-info").show();
     } else {
       // console.log("key exists")
       $("#dynamic_ul").append("<li><a id='newbar_link' href='#' data-reveal-id='newbar_div' data-reveal>Add Bar</a></li>")
