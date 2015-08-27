@@ -74,7 +74,6 @@
   margin: 0;
 }
 
-
 #profile_nav {
   cursor: default;
 }
@@ -125,6 +124,7 @@
   margin: 10px 20px;
 }
 
+/*WELCOME TEXT*/
 h1.welcome {
   line-height: 1;
   font-size: 26px;
