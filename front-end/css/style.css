@@ -48,7 +48,7 @@ body {
   top: 200px;
   left: 200px;
   margin: 0 auto;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 #logo-text {
@@ -59,19 +59,21 @@ body {
 #overlay {
   z-index: 1;
   width: 100vw;
-  height: 600px;
+  height: 93.6vh;
   position: relative;
   top: 0;
   left: 0;
 }
 
 .welcome {
+  line-height: 1;
   font-size: 26px;
   color: #F5881E;
   font-weight: 700;
 }
 
 .welcome-signup {
+  line-height: 1;
   font-size: 26px;
   color: #F5881E;
 }
