@@ -1,26 +1,29 @@
 $(function(){
+  getWeather();
 
   if (localStorage.getItem("access_token") === null) {
-    console.log("key does not exist")
-    $("#dynamic_ul").append("<li><a class='login_button' href='#'>Login</a></li>")
-    $("#dynamic_ul").append("<li><a id='signup_button' href='#'>Signup</a></li>")
-  } else {
-    console.log("key exists")
-    $("#dynamic_ul").append("<li><a id='newbar_link' href='#'>Add Bar</a></li>")
-    $("#dynamic_ul").append("<li><a id='logout_link' href='#'>Logout</a></li>")
-    var user_id = localStorage.getItem("access_id");
-    $.ajax({
-      type: "get",
-      url: "http://localhost:3000/users/" + user_id,
-      dataType: "json",
-      beforeSend: function(request){
-        checkAccess(request)
-      },
-    }).done(function(data, response){
-      console.log(data);
-      $("#user_ul").append("<li class='active'><a id='profile_nav'>Hello, " + data.firstName + "</a></li>")
-    });
-  }
+      console.log("key does not exist")
+      $("#dynamic_ul").append("<li><a class='login_button' href='#'>Login</a></li>")
+      $("#dynamic_ul").append("<li><a id='signup_button' href='#'>Signup</a></li>")
+      $("#user_ul").prepend("<li><a id='weather' href='#'>London</a></li>")
+    } else {
+      console.log("key exists")
+      $("#dynamic_ul").append("<li><a id='newbar_link' href='#'>Add Bar</a></li>")
+      $("#dynamic_ul").append("<li><a id='logout_link' href='#'>Logout</a></li>")
+      $("#user_ul").prepend("<li><a id='weather' href='#'>London</a></li>")
+      var user_id = localStorage.getItem("access_id");
+      $.ajax({
+        type: "get",
+        url: "http://localhost:3000/users/" + user_id,
+        dataType: "json",
+        beforeSend: function(request){
+          checkAccess(request)
+        },
+      }).done(function(data, response){
+        console.log(data);
+        $("#user_ul").append("<li class='active'><a id='profile_nav'>Hello, " + data.firstName + "</a></li>")
+      });
+    }
 
   $("form#login").on("submit", function(){
     event.preventDefault();
@@ -143,3 +146,24 @@ $(function(){
     $("#login").toggle();
   });
 });
+
+function getWeather(){
+  event.preventDefault();
+
+  var location = $("form#new-location input#location").val();
+
+  $.ajax({
+    type:'get',
+    url: "http://api.wunderground.com/api/429345ead5d273da/conditions/forecast/q/England/London.json"
+  }).done(function(data) {
+    addWeather(data);
+  });
+}
+
+// ADD WEATHER TO THE PAGE IN LIST FORM
+
+function addWeather(location){
+  var dt = new Date();
+  var time = dt.getHours() + ":" + dt.getMinutes();
+  $("#weather").append(" | " + time + " | " + location.current_observation.temp_c + "&deg;C");
+}
