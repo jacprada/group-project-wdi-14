@@ -91,6 +91,7 @@ $(function(){
       // but not accessible globally
       addBar(data);
       $("#newbar_div .close-reveal-modal").trigger("click");
+      $("form#newbar input[type=text]").val("");
     }).error(function(data, response) {
     });
   });
