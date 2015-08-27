@@ -114,7 +114,7 @@ function markerClick(marker, bar) {
     '<h2 id="map_title">' + bar.name + '</h2>'+
     '<div id="map_content">'+
     '<div class="bar_image" style="background-image: url('+ bar.image +')"></div>' +
-    // '<img id="map_image" src="' + bar.image + '" height="200px">' +
+    '<p id="map_address">' + bar.address + '</p>' +
     '<p id="map_description">' + bar.description + '</p>' +
     '<a href="https://citymapper.com/directions?endcoord='
     + bar.lat + ',' + bar.lng + '&endname=' + bar.name +'" target="_blank"><img class="citymapper" src="../images/custom-citymapper.png"></a>' +

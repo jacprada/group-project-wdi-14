@@ -31,9 +31,17 @@
 }
 
 #map_description {
-  margin: 15px;
+  margin-bottom: 15px;
   font-size: 16px;
   line-height: 1.2;
+}
+
+#map_address {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 700;
 }
 
 .bar_image {
