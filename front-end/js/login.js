@@ -2,13 +2,14 @@ $(function(){
 
   if (localStorage.getItem("access_token") === null) {
     console.log("key does not exist")
-    $("#dynamic_ul").append("<li><a id='login_button' href='#'>Login</a></li>")
+    $("#dynamic_ul").append("<li><a class='login_button' href='#'>Login</a></li>")
     $("#dynamic_ul").append("<li><a id='signup_button' href='#'>Signup</a></li>")
   } else {
     console.log("key exists")
     $("#dynamic_ul").append("<li><a id='check' href='http://localhost:3000/bars'>Bars</a></li>")
     $("#dynamic_ul").append("<li><a id='profile' href='#'>Profile</a></li>")
     $("#dynamic_ul").append("<li><a id='logout_link' href='#'>Logout</a></li>")
+    $("#dynamic_ul").append("<li><a id='newbar_link' href='#'>Add Bar</a></li>")
   }
 
   $("form#login").on("submit", function(){
@@ -55,6 +56,31 @@ $(function(){
     });
   });
 
+  $("form#newbar").on("submit", function(){
+    event.preventDefault();
+    $.ajax({
+      type: "post",
+      url: "http://localhost:3000/bars",
+      data: {
+        name: $(".bar_name").val(),
+        address: $(".bar_address").val(),
+        description: $(".bar_description").val(),
+        image: $(".bar_image").val(),
+      },
+      dataType: "json",
+      beforeSend: function(request){
+        checkAccess(request)
+      },
+    }).done(function(data, response) {
+      // Add bar using the function from the other file
+      // Might be a good idea to namespace later
+      // map is now window.map (a little hacky)
+      // but not accessible globally
+      addBar(data);
+    }).error(function(data, response) {
+    });
+  });
+
   $("#check").on("click", function(){
       event.preventDefault();
       $.ajax({
@@ -85,21 +111,24 @@ $(function(){
     });
   });
 
-
-
   $("#logout_link").on("click", function(){
     event.preventDefault();
     localStorage.removeItem("access_token");
     $("#map").fadeOut().empty();
     location.reload();
-  })
+  });
 
   $("#signup_button").on("click", function(){
     event.preventDefault();
     $("#signup").toggle();
   });
 
-  $("#login_button").on("click", function(){
+  $("#newbar_link").on("click", function(){
+    event.preventDefault();
+    $("#newbar").toggle();
+  });
+
+  $(".login_button").on("click", function(){
     event.preventDefault();
     $("#login").toggle();
   });

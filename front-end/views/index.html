@@ -38,7 +38,7 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a id="login_button" href="">Get In</a>
+          <a class="login_button" href="">Get In</a>
           <ul class="dropdown">
             <li><a href="">Login</a></li>
             <li><a href="#">Sign Up</a></li>
@@ -62,6 +62,13 @@
     <input class="signup_firstName" type="text" name="firstName" placeholder="First Name">
     <input class="signup_lastName" type="text" name="lastName" placeholder="Last Name">
     <input type="submit" value="Signup">
+  </form>
+  <form id="newbar" action="http://localhost:3000/bars" method="post">
+    <input class="bar_name" type="text" name="name" placeholder="Name">
+    <input class="bar_address" type="text" name="address" placeholder="Address">
+    <input class="bar_description" type="text" name="description" placeholder="Description">
+    <input class="bar_image" type="text" name="image" placeholder="Image URL">
+    <input class="button expand" type="submit" value="Add Bar">
   </form>
   <div id="map"></div>
 </body>

@@ -1,10 +1,11 @@
 $(document).ready(function(){
   initialize();
 });
-var infowindow
+
+var infowindow;
+var marker;
 
 function initialize() {
-
   // Getting the map div in the html file
   var mapCanvas = document.getElementById('map');
   // Setting up map options to render map of London
@@ -16,7 +17,7 @@ function initialize() {
   }
 
   // Rendering desired map in selected div
-  var map = new google.maps.Map(mapCanvas, mapOptions);
+  window.map = new google.maps.Map(mapCanvas, mapOptions);
 
   // Adding array of styles
   var styles = [
@@ -193,9 +194,18 @@ function initialize() {
     {name: "Styled Map"});
 
   //Associate the styled map with the MapTypeId and set it to display. ***
-  map.mapTypes.set('map_style', styledMap);
-  map.setMapTypeId('map_style');
+  window.map.mapTypes.set('map_style', styledMap);
+  window.map.setMapTypeId('map_style');
 
+  google.maps.event.addListenerOnce(map, 'idle', function(){
+    setTimeout(function(){
+      addBars();
+    }, 200); 
+  });
+
+}
+
+function addBars(){
   // Making ajax call to back-end in order to retrieve json bar data
   var ajax = $.ajax({
     type: "get",
@@ -206,43 +216,53 @@ function initialize() {
     },
   }).done(function(data){
     $.each(data, function(index, bar){
-      // console.log(bar.name);
-      // console.log(bar.lat);
-      // console.log(bar.lng);
-      // Setting up marker based on json bar (name, lat, lng) data
-      // var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-      var marker = new google.maps.Marker({
-        position: {lat: bar.lat, lng: bar.lng},
-        map: map,
-        title: bar.name,
-        icon: "http://i.imgur.com/aWWkcX1.png"
-      });
-      
-      // Setting up info window based on json bar (name, image, description, facebook) data
-      // Adding Citymapper link with pre-saved adddress
-
-      // Adding click listener to open info window when marker is clicked
-      marker.addListener('click', function() {
-        if(infowindow) {
-            infowindow.close()
-        }
-        infowindow = new google.maps.InfoWindow({
-          content: '<div id="content">'+
-          '<div id="siteNotice">'+
-          '</div>'+
-          '<h2 id="firstHeading" class="firstHeading">' + bar.name + '</h2>'+
-          '<div id="bodyContent">'+
-          '<img src="' + bar.image + '" height="200px">' +
-          '<p>' + bar.description + '</p>' +
-          '<a href="' + bar.facebook_url + '" target="_blank">Facebook</a><br>' +
-          '<a href="https://citymapper.com/directions?endcoord='
-          + bar.lat + ',' + bar.lng + '&endname=' + bar.name +'" target="_blank">Get There</a>' +
-          '</div>'+
-          '</div>'
-        });
-        map.setCenter(marker.getPosition());
-        infowindow.open(map, marker);
-      });
+      (function(){
+        setTimeout(function() {
+          addBar(bar);
+        }, (index+1) * 200);
+      }(bar, index));
     });
-});
+  });
 }
+
+function addBar(bar, index) {
+  // Setting up marker based on json bar (name, lat, lng) data
+  // var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+  var marker = new google.maps.Marker({
+    position: {lat: bar.lat, lng: bar.lng},
+    map: window.map,
+    title: bar.name,
+    animation: google.maps.Animation.DROP,
+    icon: "http://i.imgur.com/aWWkcX1.png"
+  });
+  
+  // Setting up info window based on json bar (name, image, description, facebook) data
+  // Adding Citymapper link with pre-saved adddress
+
+  // Adding click listener to open info window when marker is clicked
+  marker.addListener('click', function(){
+    markerClick(marker, bar);
+  });  
+}
+
+function markerClick(marker, bar) {
+  if(infowindow) infowindow.close();
+
+  infowindow = new google.maps.InfoWindow({
+    content: '<div id="content">'+
+    '<div id="siteNotice">'+
+    '</div>'+
+    '<h2 id="firstHeading" class="firstHeading">' + bar.name + '</h2>'+
+    '<div id="bodyContent">'+
+    '<img src="' + bar.image + '" height="200px">' +
+    '<p>' + bar.description + '</p>' +
+    '<a href="' + bar.facebook_url + '" target="_blank">Facebook</a><br>' +
+    '<a href="https://citymapper.com/directions?endcoord='
+    + bar.lat + ',' + bar.lng + '&endname=' + bar.name +'" target="_blank">Get There</a>' +
+    '</div>'+
+    '</div>'
+  });
+
+  window.map.setCenter(marker.getPosition());
+  infowindow.open(window.map, marker);
+};
