@@ -56,6 +56,14 @@
   margin-bottom: 10px;
 }
 
+.switch label:after {
+  border-radius: 100px;
+}
+
+label {
+  border-radius: 20px;
+}
+
 #weather {
   cursor: default;
 }
