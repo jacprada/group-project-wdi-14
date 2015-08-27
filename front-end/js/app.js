@@ -232,7 +232,7 @@ function addBars(){
   // Making ajax call to back-end in order to retrieve json bar data
   var ajax = $.ajax({
     type: "get",
-    url: 'http://localhost:3000/bars',
+    url: 'https://floating-sea-7710.herokuapp.com/bars',
     dataType: "json",
     beforeSend: function(request){
       checkAccess(request)

@@ -16,7 +16,7 @@ $(function(){
       var user_id = localStorage.getItem("access_id");
       $.ajax({
         type: "get",
-        url: "http://localhost:3000/users/" + user_id,
+        url: "https://floating-sea-7710.herokuapp.com/users/" + user_id,
         dataType: "json",
         beforeSend: function(request){
           checkAccess(request)
@@ -75,7 +75,7 @@ $(function(){
     event.preventDefault();
     $.ajax({
       type: "post",
-      url: "http://localhost:3000/bars",
+      url: "https://floating-sea-7710.herokuapp.com/bars",
       data: {
         name: $(".bar_name").val(),
         address: $(".bar_address").val(),
@@ -153,8 +153,6 @@ $(function(){
 
 function getWeather(){
   event.preventDefault();
-
-  var location = $("form#new-location input#location").val();
 
   $.ajax({
     type:'get',
