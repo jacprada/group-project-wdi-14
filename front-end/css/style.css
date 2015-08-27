@@ -1,32 +1,64 @@
-body {
-  font-family: 'Poppins', sans-serif;
-}
-
 #map {
   width: 100vw;
   height: 100vh;
   margin: 0 auto;
 }
 
-#content {
+#map_window {
   width: 400px;
   text-align: center;
 }
 
-#login {
-  display: none;
+#map_heading {
+
 }
 
-#signup {
-  display: none;
+#map_content {
+
 }
 
-#newbar {
-  display: none;
+#map_image {
+  width: 100%;
+  height: 100%;
+}
+
+#map_description {
+
+}
+
+#map_facebook {
+
+}
+
+#map_citymapper {
+
 }
 
 #profile_nav {
   cursor: default;
+}
+
+#about_image {
+  max-width: 80%;
+  max-height: 80%;
+  margin: 10px 0;
+}
+
+#signup_div {
+  width: 50%;
+}
+
+#login_div {
+  width: 50%;
+}
+
+#about_div {
+  width: 50%;
+}
+
+#newbar_div {
+  width: 50%;
+
 }
 
 #logo-small {
@@ -42,7 +74,6 @@ body {
   height: 250px;
   z-index: 1;
   top: 200px;
-  left: 200px;
   margin: 0 auto;
   margin-bottom: 50px;
 }
