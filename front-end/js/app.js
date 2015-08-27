@@ -6,11 +6,20 @@ var infowindow;
 var marker;
 
 function initialize() {
+
+    $(document).foundation();
+    $('a.custom-close-reveal-modal').click(function(){
+        $('#about').foundation('reveal', 'close');
+        $('#login_div').foundation('reveal', 'close');
+    });
+
   // Getting the map div in the html file
   var mapCanvas = document.getElementById('map');
   // Setting up map options to render map of London
+  var center = new google.maps.LatLng(51.517557, -0.095624);
+
   var mapOptions = {
-    center: new google.maps.LatLng(51.517557, -0.095624),
+    center: center,
     zoom: 13,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     mapMaker: true,
@@ -205,9 +214,15 @@ function initialize() {
   window.map.mapTypes.set('map_style', styledMap);
   window.map.setMapTypeId('map_style');
 
+  google.maps.event.addDomListener(window, 'resize', function() {
+    window.map.setCenter(center);
+  });
+
   google.maps.event.addListenerOnce(map, 'idle', function(){
     setTimeout(function(){
-      addBars();
+        if (localStorage.getItem("access_token") !== null) {
+          addBars();
+      }
   }, 200); 
 });
 
@@ -257,15 +272,15 @@ function markerClick(marker, bar) {
   if(infowindow) infowindow.close();
 
   infowindow = new google.maps.InfoWindow({
-    content: '<div id="content">'+
+    content: '<div id="map_window">'+
     '<div id="siteNotice">'+
     '</div>'+
-    '<h2 id="firstHeading" class="firstHeading">' + bar.name + '</h2>'+
-    '<div id="bodyContent">'+
-    '<img src="' + bar.image + '" height="200px">' +
-    '<p>' + bar.description + '</p>' +
-    '<a href="' + bar.facebook_url + '" target="_blank">Facebook</a><br>' +
-    '<a href="https://citymapper.com/directions?endcoord='
+    '<h2 id="map_content" class="firstHeading">' + bar.name + '</h2>'+
+    '<div id="map_content">'+
+    '<img id="map_image" src="' + bar.image + '" height="200px">' +
+    '<p id="map_description">' + bar.description + '</p>' +
+    '<a id="map_facebook href="' + bar.facebook_url + '" target="_blank">Facebook</a><br>' +
+    '<a id="map_citymapper href="https://citymapper.com/directions?endcoord='
     + bar.lat + ',' + bar.lng + '&endname=' + bar.name +'" target="_blank">Get There</a>' +
     '</div>'+
     '</div>'

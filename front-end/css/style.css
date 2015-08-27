@@ -4,7 +4,7 @@ body {
 
 #map {
   width: 100vw;
-  height: 100vh;
+  height: 93.8vh;
   margin: 0 auto;
   position: absolute;
   z-index: -1;
@@ -12,29 +12,65 @@ body {
   left: 0;
 }
 
-#content {
+#map_window {
   width: 400px;
   text-align: center;
 }
 
-#login {
-  display: none;
+#map_heading {
+
 }
 
-#signup {
-  display: none;
+#map_content {
+
 }
 
-#newbar {
-  display: none;
+#map_image {
+  width: 100%;
+  height: 100%;
+}
+
+#map_description {
+
+}
+
+#map_facebook {
+
+}
+
+#map_citymapper {
+
 }
 
 #profile_nav {
   cursor: default;
 }
 
+#about_image {
+  max-width: 80%;
+  max-height: 80%;
+  margin: 10px 0;
+}
+
+#signup_div {
+  width: 50%;
+}
+
+#login_div {
+  width: 50%;
+}
+
+#about_div {
+  width: 50%;
+}
+
+#newbar_div {
+  width: 50%;
+
+}
+
 #logo-small {
-  height:150px;
+  height:120px;
   z-index: 1;
   position: fixed;
   bottom: 20px;
@@ -43,7 +79,7 @@ body {
 }
 
 #logo-large {
-  height: 300px;
+  height: 250px;
   z-index: 1;
   top: 200px;
   left: 200px;
@@ -51,40 +87,37 @@ body {
   margin-bottom: 50px;
 }
 
+/*NAV BAR LOGO*/
 #logo-text {
   width: 80px;
   margin: 10px 20px;
 }
 
-#overlay {
-  z-index: 1;
-  width: 100vw;
-  height: 93.6vh;
-  position: relative;
-  top: 0;
-  left: 0;
-}
-
-.welcome {
+h1.welcome {
   line-height: 1;
   font-size: 26px;
   color: #F5881E;
   font-weight: 700;
 }
 
-.welcome-signup {
+h1.welcome-signup {
   line-height: 1;
   font-size: 26px;
   color: #F5881E;
 }
 
-#welcome-info {
+.welcome-wrapper {
+  display: none;
+  width: 100vh;
+  height: 700px;
+  margin-top: 80px;
+}
+
+.welcome-info {
   display: none;
   text-align: center;
-  width: 700px;
+  z-index: 1;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);  
-  transform: translate(-50%, -50%); 
+  top: 175px;
+  width: 100vw;
 }
