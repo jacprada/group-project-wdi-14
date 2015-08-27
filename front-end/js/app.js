@@ -273,14 +273,12 @@ function markerClick(marker, bar) {
 
   infowindow = new google.maps.InfoWindow({
     content: '<div id="map_window">'+
-    '<div id="siteNotice">'+
-    '</div>'+
-    '<h2 id="map_content" class="firstHeading">' + bar.name + '</h2>'+
+    '<h2 id="map_title">' + bar.name + '</h2>'+
     '<div id="map_content">'+
     '<img id="map_image" src="' + bar.image + '" height="200px">' +
     '<p id="map_description">' + bar.description + '</p>' +
-    '<a id="map_facebook href="' + bar.facebook_url + '" target="_blank">Facebook</a><br>' +
-    '<a id="map_citymapper href="https://citymapper.com/directions?endcoord='
+    '<a href="' + bar.facebook_url + '" target="_blank">Facebook</a><br>' +
+    '<a href="https://citymapper.com/directions?endcoord='
     + bar.lat + ',' + bar.lng + '&endname=' + bar.name +'" target="_blank">Get There</a>' +
     '</div>'+
     '</div>'
