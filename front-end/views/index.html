@@ -19,7 +19,7 @@
   <nav class="top-bar" data-topbar role="navigation">
     <ul class="title-area">
       <li class="name">
-        <img id="logo-text" src="../images/logo-text.png">
+        <a id="home_button" href=""><img id="logo-text" src="../images/logo-text.png"></a>
       </li>
       <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
     </ul>
@@ -27,6 +27,10 @@
       <ul id="user_ul" class="right">
       </ul>
       <ul id="dynamic_ul" class="left">
+      <li id="switch_div"><a id="switch" class="switch tiny">
+          <input id="exampleCheckboxSwitch" type="checkbox">
+          <label for="exampleCheckboxSwitch"></label>
+      </a></li>
         <li><a id="about_button" href="" data-reveal-id="about_div" data-reveal>About</a></li>
       </ul>
     </section>
@@ -37,6 +41,7 @@
    <img id="about_image" src="../imgs/about.jpg">
    <h6>Brew maps the top rooftop bars in London.</h6>
    <h6>Find your new favorite spot overlooking the city skyline, have a drink and socialize with with your friends.</h6>
+   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
  </div>
 
  <div id="login_div" class="text-center reveal-modal" data-reveal>

@@ -5,34 +5,51 @@
 }
 
 #map_window {
-  width: 400px;
+  width: 600px;
   text-align: center;
 }
 
 #map_heading {
-
+  font-style: bold;
 }
 
 #map_content {
+  text-align: center;
+  font-size: 22px;
+}
 
+#map_title {
+  font-size: 45px;
 }
 
 #map_image {
-  width: 100%;
-  height: 100%;
+  max-width: 80%;
+  max-height: 80%;
+  border: 3px solid black;
 }
 
 #map_description {
-
+  margin: 15px;
 }
 
-#map_facebook {
-
+#weather {
+  cursor: default;
 }
 
-#map_citymapper {
-
+#weather_id a:hover {
+    background-color: #333333;
 }
+
+#switch_div {
+  width: 80px;
+  height: 5px;
+}
+
+#switch {
+  padding-top: 8px;
+  margin: 0;
+}
+
 
 #profile_nav {
   cursor: default;
