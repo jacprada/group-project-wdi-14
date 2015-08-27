@@ -49,13 +49,13 @@ app.post('/signup', function(req, res, next) {
       if (err) return next(err)
         
       if (!user) {
-        return res.status(401).send({ error: 'Something went wrong...' });
+        return res.status(401).send({ error: 'User already exists!' });
       }
 
-      //user has authenticated correctly thus we create a JWT token 
+      // User has authenticated so issue token 
       var token = jwt.sign(user, "barapp", { expiresInMinutes: 1440 });
 
-      //send back the token to the front-end to store in a cookie
+      // Send back the token to the front-end to store
       res.status(200).send({ 
         message: "Thank you for authenticating",
         token: token,

@@ -32,6 +32,29 @@ $(function(){
     });
   });
 
+  $("form#signup").on("submit", function(){
+    event.preventDefault();
+    $.ajax({
+      type: "post",
+      url: $(this).attr("action"),
+      data: {
+        email: $(".signup_email").val(),
+        password: $(".signup_password").val(),
+        password: $(".signup_firstName").val(),
+        password: $(".signup_lastName").val(),
+      },
+      dataType: "json",
+    }).done(function(data, response) {
+      // console.log(data, response);
+      console.log(data)
+      var user_id = data.user._id
+      var access_token = data.token;
+      localStorage.setItem("access_token", access_token);
+      localStorage.setItem("access_id", user_id);
+      location.reload();
+    });
+  });
+
   $("#check").on("click", function(){
       event.preventDefault();
       $.ajax({

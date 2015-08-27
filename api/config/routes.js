@@ -10,12 +10,9 @@ var User = require('../models/user');
 var jwt = require('jsonwebtoken');
 var expressJWT = require('express-jwt');
 
-function authenticatedUser(req, res, next) {
-  if (req.isAuthenticated()) return next();
-  res.redirect('/');
-}
-
 router.post('/login', authenticate);
+
+// router.use('/', expressJWT({secret: "barapp"}));
 
 router.use(decode);
 
