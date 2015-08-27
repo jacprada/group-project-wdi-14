@@ -1,3 +1,8 @@
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
 #map {
   width: 100vw;
   height: 93.8vh;
@@ -22,12 +27,6 @@
   font-size: 28px;
   font-weight: 700;
   margin-top: 20px;
-}
-
-#map_image {
-  max-width: 80%;
-  max-height: 80%;
-  border: 3px solid black;
 }
 
 #map_description {
@@ -99,9 +98,8 @@ a#switch.switch.tiny {
 }
 
 #about_image {
-  max-width: 80%;
-  max-height: 80%;
-  margin: 10px 0;
+  width: 580px;
+  margin: 10px 0 20px 0;
 }
 
 #signup_div {
@@ -145,17 +143,18 @@ a#switch.switch.tiny {
 }
 
 /*WELCOME TEXT*/
-h1.welcome {
+h2.welcome {
   line-height: 1;
   font-size: 26px;
   color: #F5881E;
   font-weight: 700;
 }
 
-h1.welcome-signup {
-  line-height: 1;
-  font-size: 26px;
+h2.welcome-signup {
+  line-height: 0.5;
+  font-size: 36px;
   color: #F5881E;
+  font-family: 'Dancing Script', cursive;
 }
 
 .welcome-info {
@@ -169,15 +168,16 @@ h1.welcome-signup {
 
 @media only screen and (max-width: 690px) {
 
-  h1.welcome {
+  h2.welcome {
     line-height: 1;
     font-size: 19px;
     font-weight: 700;
   }
 
-  h1.welcome-signup {
+  h2.welcome-signup {
     line-height: 1;
     font-size: 19px;
+    font-weight: 400;
   }
 
   #logo-large {
