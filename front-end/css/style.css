@@ -4,9 +4,34 @@
   margin: 0 auto;
 }
 
-#content {
+#map_window {
   width: 400px;
   text-align: center;
+}
+
+#map_heading {
+
+}
+
+#map_content {
+
+}
+
+#map_image {
+  width: 100%;
+  height: 100%;
+}
+
+#map_description {
+
+}
+
+#map_facebook {
+
+}
+
+#map_citymapper {
+
 }
 
 #profile_nav {
