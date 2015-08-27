@@ -5,7 +5,7 @@ $(function(){
       // console.log("key does not exist")
       $("#dynamic_ul").append("<li><a href='#' data-reveal-id='login_div' data-reveal>Login</a></li>")
       $("#dynamic_ul").append("<li><a id='signup_button' href='#' data-reveal-id='signup_div' data-reveal>Signup</a></li>")
-      $("#user_ul").prepend("<li><a id='weather'>London</a></li>")
+      $("#user_ul").prepend("<li id='weather_id'><a id='weather'>London</a></li>")
       $(".welcome-info").show();
     } else {
       // console.log("key exists")
@@ -80,7 +80,7 @@ $(function(){
         name: $(".bar_name").val(),
         address: $(".bar_address").val(),
         description: $(".bar_description").val(),
-        image: $(".bar_image").val(),
+        image: $(".bar_image").val()
       },
       dataType: "json",
       beforeSend: function(request){

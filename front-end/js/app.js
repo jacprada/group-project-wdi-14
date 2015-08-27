@@ -113,11 +113,11 @@ function markerClick(marker, bar) {
     content: '<div id="map_window">'+
     '<h2 id="map_title">' + bar.name + '</h2>'+
     '<div id="map_content">'+
-    '<img id="map_image" src="' + bar.image + '" height="200px">' +
+    '<div class="bar_image" style="background-image: url('+ bar.image +')"></div>' +
+    // '<img id="map_image" src="' + bar.image + '" height="200px">' +
     '<p id="map_description">' + bar.description + '</p>' +
-    '<a href="' + bar.facebook_url + '" target="_blank">Facebook</a><br>' +
     '<a href="https://citymapper.com/directions?endcoord='
-    + bar.lat + ',' + bar.lng + '&endname=' + bar.name +'" target="_blank">Get There</a>' +
+    + bar.lat + ',' + bar.lng + '&endname=' + bar.name +'" target="_blank"><img class="citymapper" src="../images/custom-citymapper.png"></a>' +
     '</div>'+
     '</div>'
 });
