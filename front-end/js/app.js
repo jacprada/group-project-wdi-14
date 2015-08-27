@@ -6,11 +6,20 @@ var infowindow;
 var marker;
 
 function initialize() {
+
+    $(document).foundation();
+    $('a.custom-close-reveal-modal').click(function(){
+        $('#about').foundation('reveal', 'close');
+        $('#login_div').foundation('reveal', 'close');
+    });
+
   // Getting the map div in the html file
   var mapCanvas = document.getElementById('map');
   // Setting up map options to render map of London
+  var center = new google.maps.LatLng(51.517557, -0.095624);
+
   var mapOptions = {
-    center: new google.maps.LatLng(51.517557, -0.095624),
+    center: center,
     zoom: 13,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     mapMaker: true
@@ -197,11 +206,17 @@ function initialize() {
   window.map.mapTypes.set('map_style', styledMap);
   window.map.setMapTypeId('map_style');
 
+  google.maps.event.addDomListener(window, 'resize', function() {
+    window.map.setCenter(center);
+  });
+
   google.maps.event.addListenerOnce(map, 'idle', function(){
     setTimeout(function(){
-      addBars();
-    }, 200); 
-  });
+        if (localStorage.getItem("access_token") !== null) {
+          addBars();
+      }
+  }, 200); 
+});
 
 }
 

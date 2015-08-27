@@ -2,13 +2,13 @@ $(function(){
   getWeather();
 
   if (localStorage.getItem("access_token") === null) {
-      console.log("key does not exist")
-      $("#dynamic_ul").append("<li><a class='login_button' href='#'>Login</a></li>")
-      $("#dynamic_ul").append("<li><a id='signup_button' href='#'>Signup</a></li>")
+      // console.log("key does not exist")
+      $("#dynamic_ul").append("<li><a href='#' data-reveal-id='login_div' data-reveal>Login</a></li>")
+      $("#dynamic_ul").append("<li><a id='signup_button' href='#' data-reveal-id='signup_div' data-reveal>Signup</a></li>")
       $("#user_ul").prepend("<li><a id='weather' href='#'>London</a></li>")
     } else {
-      console.log("key exists")
-      $("#dynamic_ul").append("<li><a id='newbar_link' href='#'>Add Bar</a></li>")
+      // console.log("key exists")
+      $("#dynamic_ul").append("<li><a id='newbar_link' href='#' data-reveal-id='newbar_div' data-reveal>Add Bar</a></li>")
       $("#dynamic_ul").append("<li><a id='logout_link' href='#'>Logout</a></li>")
       $("#user_ul").prepend("<li><a id='weather' href='#'>London</a></li>")
       var user_id = localStorage.getItem("access_id");
@@ -20,7 +20,7 @@ $(function(){
           checkAccess(request)
         },
       }).done(function(data, response){
-        console.log(data);
+        // console.log(data);
         $("#user_ul").append("<li class='active'><a id='profile_nav'>Hello, " + data.firstName + "</a></li>")
       });
     }
@@ -90,23 +90,24 @@ $(function(){
       // map is now window.map (a little hacky)
       // but not accessible globally
       addBar(data);
+      $("#newbar_div .close-reveal-modal").trigger("click");
     }).error(function(data, response) {
     });
   });
 
-  $("#check").on("click", function(){
-      event.preventDefault();
-      $.ajax({
-        type: "get",
-        url: $(this).attr("href"),
-        dataType: "json",
-        beforeSend: function(request){
-          checkAccess(request)
-        },
-      }).done(function(data, response){
-        console.log(data);
-      });
-    });
+  // $("#check").on("click", function(){
+  //     event.preventDefault();
+  //     $.ajax({
+  //       type: "get",
+  //       url: $(this).attr("href"),
+  //       dataType: "json",
+  //       beforeSend: function(request){
+  //         checkAccess(request)
+  //       },
+  //     }).done(function(data, response){
+  //       console.log(data);
+  //     });
+  //   });
 
   // $("#profile").on("click", function(){
   //   var super_id = localStorage.getItem("access_id");
@@ -131,20 +132,20 @@ $(function(){
     location.reload();
   });
 
-  $("#signup_button").on("click", function(){
-    event.preventDefault();
-    $("#signup").toggle();
-  });
+  // $("#signup_button").on("click", function(){
+  //   event.preventDefault();
+  //   $("#signup").toggle();
+  // });
 
-  $("#newbar_link").on("click", function(){
-    event.preventDefault();
-    $("#newbar").toggle();
-  });
+  // $("#newbar_link").on("click", function(){
+  //   event.preventDefault();
+  //   $("#newbar").toggle();
+  // });
 
-  $(".login_button").on("click", function(){
-    event.preventDefault();
-    $("#login").toggle();
-  });
+  // $(".login_button").on("click", function(){
+  //   event.preventDefault();
+  //   $("#login").toggle();
+  // });
 });
 
 function getWeather(){

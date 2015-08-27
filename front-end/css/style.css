@@ -1,6 +1,6 @@
 #map {
   width: 100vw;
-  height: 100vh;
+  height: 93.8vh;
   margin: 0 auto;
 }
 
@@ -9,18 +9,12 @@
   text-align: center;
 }
 
-#login {
-  display: none;
-}
-
-#signup {
-  display: none;
-}
-
-#newbar {
-  display: none;
-}
-
 #profile_nav {
   cursor: default;
+}
+
+#about_image {
+  max-width: 60%;
+  max-height: 60%;
+  margin: 10px 0;
 }
