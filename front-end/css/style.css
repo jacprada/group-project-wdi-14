@@ -1,10 +1,6 @@
-body {
-  font-family: 'Poppins', sans-serif;
-}
-
 #map {
   width: 100vw;
-  height: 93.8vh;
+  height: 100vh;
   margin: 0 auto;
   position: absolute;
   z-index: -1;
@@ -82,7 +78,6 @@ body {
   height: 250px;
   z-index: 1;
   top: 200px;
-  left: 200px;
   margin: 0 auto;
   margin-bottom: 50px;
 }
