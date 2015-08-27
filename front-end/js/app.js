@@ -207,12 +207,17 @@ function initialize() {
 
   // Create a new StyledMapType object, passing it the array of styles, ***
   // as well as the name to be displayed on the map type control.
-  var styledMap = new google.maps.StyledMapType(styles,
-    {name: "Styled Map"});
+  $('#switch').click(function(styles) {
+    var check_style = $('#exampleCheckboxSwitch')
+    if (check_style.is(':checked')) { 
+      var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
 
-  //Associate the styled map with the MapTypeId and set it to display. ***
-  window.map.mapTypes.set('map_style', styledMap);
-  window.map.setMapTypeId('map_style');
+          //Associate the styled map with the MapTypeId and set it to display. ***
+          window.map.mapTypes.set('map_style', styledMap);
+          window.map.setMapTypeId('map_style');
+          location.reload();
+        }
+      }) 
 
   google.maps.event.addDomListener(window, 'resize', function() {
     window.map.setCenter(center);
