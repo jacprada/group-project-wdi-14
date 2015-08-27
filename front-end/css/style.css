@@ -20,3 +20,7 @@
 #newbar {
   display: none;
 }
+
+#profile_nav {
+  cursor: default;
+}

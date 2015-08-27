@@ -12,11 +12,7 @@
   <script src="../js/login.js"></script>
 </head>
 <body>
-  <!-- Testing authentication -->
-<!--   <a id="check" href="http://localhost:3000/bars">Test</a>
- -->
-  <!-- Removing Jwt from LocalStorage -->
-<!--   <a class="logout" href="#">Logout</a> -->
+  
   <nav class="top-bar" data-topbar role="navigation">
     <ul class="title-area">
       <li class="name">
@@ -27,23 +23,8 @@
     </ul>
     <section class="top-bar-section">
       <!-- Right Nav Section -->
-      <ul class="right">
+      <ul id="user_ul" class="right">
         <!--         <li class="active"><a href="#">Right Button Active</a></li> -->
-        <li class="has-dropdown">
-          <a href="#">Username</a>
-          <ul class="dropdown">
-            <li><a href="#">Add Bar</a></li>
-            <li><a href="#">My Profile</a></li>
-            <li class="active"><a href="#">Logout</a></li>
-          </ul>
-        </li>
-        <li class="has-dropdown">
-          <a class="login_button" href="">Get In</a>
-          <ul class="dropdown">
-            <li><a href="">Login</a></li>
-            <li><a href="#">Sign Up</a></li>
-          </ul>
-        </li>
       </ul>
       <!-- Left Nav Section -->
       <ul id="dynamic_ul" class="left">
@@ -51,6 +32,7 @@
       </ul>
     </section>
   </nav>
+  
   <form id="login" action="http://localhost:3000/login" method="post">
     <input class="email" type="text" name="email" placeholder="Email">
     <input class="password" type="password" name="password" placeholder="Password">
