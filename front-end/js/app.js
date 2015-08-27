@@ -13,8 +13,16 @@ function initialize() {
     center: new google.maps.LatLng(51.517557, -0.095624),
     zoom: 13,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
-    mapMaker: true
+    mapMaker: true,
+    mapTypeControl: false,
+    streetViewControl: false,
+    panControl: false,
+    zoomControl: true,
+    zoomControlOptions: {
+      style: google.maps.ZoomControlStyle.SMALL,
+      position: google.maps.ControlPosition.LEFT_TOP
   }
+}
 
   // Rendering desired map in selected div
   window.map = new google.maps.Map(mapCanvas, mapOptions);
@@ -200,8 +208,8 @@ function initialize() {
   google.maps.event.addListenerOnce(map, 'idle', function(){
     setTimeout(function(){
       addBars();
-    }, 200); 
-  });
+  }, 200); 
+});
 
 }
 
@@ -213,16 +221,16 @@ function addBars(){
     dataType: "json",
     beforeSend: function(request){
       checkAccess(request)
-    },
-  }).done(function(data){
+  },
+}).done(function(data){
     $.each(data, function(index, bar){
       (function(){
         setTimeout(function() {
           addBar(bar);
-        }, (index+1) * 200);
-      }(bar, index));
-    });
+      }, (index+1) * 200);
+    }(bar, index));
   });
+});
 }
 
 function addBar(bar, index) {
@@ -233,8 +241,8 @@ function addBar(bar, index) {
     map: window.map,
     title: bar.name,
     animation: google.maps.Animation.DROP,
-    icon: "http://i.imgur.com/aWWkcX1.png"
-  });
+    icon: "http://i.imgur.com/mKPqLrX.png"
+});
   
   // Setting up info window based on json bar (name, image, description, facebook) data
   // Adding Citymapper link with pre-saved adddress
@@ -242,7 +250,7 @@ function addBar(bar, index) {
   // Adding click listener to open info window when marker is clicked
   marker.addListener('click', function(){
     markerClick(marker, bar);
-  });  
+});  
 }
 
 function markerClick(marker, bar) {
@@ -261,7 +269,7 @@ function markerClick(marker, bar) {
     + bar.lat + ',' + bar.lng + '&endname=' + bar.name +'" target="_blank">Get There</a>' +
     '</div>'+
     '</div>'
-  });
+});
 
   window.map.setCenter(marker.getPosition());
   infowindow.open(window.map, marker);

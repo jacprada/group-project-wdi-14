@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="../css/animate.css">
   <link rel="stylesheet" href="../css/foundation.css">
   <link rel="stylesheet" href="../css/style.css">
+  <link href='https://fonts.googleapis.com/css?family=Poppins:400,700' rel='stylesheet' type='text/css'>
   <script src="https://maps.googleapis.com/maps/api/js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="../js/checkaccess.js"></script>
@@ -12,11 +13,11 @@
   <script src="../js/login.js"></script>
 </head>
 <body>
-  
+
   <nav class="top-bar" data-topbar role="navigation">
     <ul class="title-area">
       <li class="name">
-        <h1><a href="./index.html">Home</a></h1>
+        <img id="logo-text" src="../images/logo-text.png">
       </li>
       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
       <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -52,6 +53,14 @@
     <input class="bar_image" type="text" name="image" placeholder="Image URL">
     <input class="button expand" type="submit" value="Add Bar">
   </form>
+  <div id="overlay">
+    <img id="logo-small" src="../images/Brew_logo-02.png">
+    <div id="welcome-info">
+    <img id="logo-large" src="../images/Brew_logo-02.png">
+    <h1 class="welcome">LONDON'S PREMIER ROOFTOP VENUES</h1>
+    <h1 class="welcome-signup">SIGNUP FOR EXCLUSIVE ACCESS</h1>
+    </div>
+  </div>
   <div id="map"></div>
 </body>
 </html>
