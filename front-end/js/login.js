@@ -40,8 +40,8 @@ $(function(){
       data: {
         email: $(".signup_email").val(),
         password: $(".signup_password").val(),
-        password: $(".signup_firstName").val(),
-        password: $(".signup_lastName").val(),
+        firstName: $(".signup_firstName").val(),
+        lastName: $(".signup_lastName").val(),
       },
       dataType: "json",
     }).done(function(data, response) {
