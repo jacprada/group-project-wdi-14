@@ -9,15 +9,14 @@ var passport          = require('passport');
 var cookieParser      = require("cookie-parser");
 var methodOverride    = require("method-override");
 var jwt               = require('jsonwebtoken');
-var expressJWT        = require('express-jwt'); 
+var expressJWT        = require('express-jwt');
+var flash             = require('connect-flash'); 
 var config            = require('./config');
 var User              = require('./models/user');
 
 mongoose.connect(config.database);
+require('./config/passport')(passport);
 app.set('superSecret', config.secret);
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(methodOverride(function(req, res){
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -27,82 +26,43 @@ app.use(methodOverride(function(req, res){
   }
 }));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(logger('dev'));
 app.use(cors());
-
-// passport.initialize() middleware is required to initialize Passport. 
 app.use(passport.initialize());
+app.use(flash());
 
-// app.use(flash()); 
+// app.post('/signup', function(req, res) {
+//   passport.authenticate('local-signup', {
+//     successRedirect : '/bars',
+//     failureRedirect : '/users',
+//     failureFlash : true
+//   })(req, res, function(){
+//     res.redirect('/bars');
+//   });
+// });
 
-require('./config/passport')(passport);
-
-// app.use(function(req, res, next) {
-//   global.user = req.user;
-//   next();
-// })
-
-app.post('/signup', function(req, res) {
-  passport.authenticate('local-signup', {
-    successRedirect : '/bars',
-    failureRedirect : '/users',
-    failureFlash : true
-  })(req, res, function(){
-    res.redirect('/bars');
-  });
-});
-
-// route to authenticate a user
-app.post('/login', function(req, res) {
-  User.findOne({
-    email: req.body.email
-  }, function(err, user) {
-    if (err) throw err;
-    if (!user) {
-      res.json({ success: false, message: 'Authentication failed. User not found.' });
-    } else if (user) {
-      if (!user.validPassword(req.body.password)) {
-        res.json({ success: false, message: 'Authentication failed. Wrong password.' });
-      } else {
-        var token = jwt.sign(user, app.get('superSecret'), {
-          expiresInMinutes: 1440 // expires in 24 hours
-        });
-        res.json({
-          success: true,
-          message: 'Enjoy your token!',
-          token: token,
-          user: user
-        });
-      }   
-    }
-  });
-});
-
-// route middleware to verify a token
-app.use(function(req, res, next) {
-  // check header or url parameters or post parameters for token
-  var token = req.body.token || req.query.token || req.headers['x-access-token'];
-  // decode token
-  if (token) {
-    // verifies secret and checks exp
-    jwt.verify(token, app.get('superSecret'), function(err, decoded) {      
-      if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' });    
-      } else {
-        // if everything is good, save to request for use in other routes
-        req.decoded = decoded;
-        next();
+app.post('/signup', function(req, res, next) {
+  passport.authenticate('local-signup', function(err, user, info) {
+      if (err) return next(err)
+        
+      if (!user) {
+        return res.status(401).send({ error: 'Something went wrong...' });
       }
-    });
-  } else {
-    // if there is no token
-    // return an error
-    return res.status(403).send({ 
-      success: false, 
-      message: 'No token provided.' 
-    }); 
-  }
+
+      //user has authenticated correctly thus we create a JWT token 
+      var token = jwt.sign(user, "barapp", { expiresInMinutes: 1440 });
+
+      //send back the token to the front-end to store in a cookie
+      res.status(200).send({ 
+        message: "Thank you for authenticating",
+        token: token,
+        user: user
+      });
+
+    })(req, res, next);
 });
 
 // app.use('/', expressJWT({secret: config.secret}));
