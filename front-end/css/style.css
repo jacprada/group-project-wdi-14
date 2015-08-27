@@ -18,3 +18,11 @@
   max-height: 60%;
   margin: 10px 0;
 }
+
+#signup_div {
+  width: 50%;
+}
+
+#login_div {
+  width: 50%;
+}
