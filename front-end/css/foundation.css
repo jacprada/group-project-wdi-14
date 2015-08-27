@@ -1961,7 +1961,7 @@ meta.foundation-mq-topbar {
       background: #464646;
       color: #FFFFFF; }
       .top-bar-section ul li.active > a:hover {
-        background: #0078a0;
+        background: #222222;
         color: #FFFFFF; }
   .top-bar-section .has-form {
     padding: 0.9375rem; }
@@ -2102,7 +2102,7 @@ meta.foundation-mq-topbar {
       line-height: 2.8125rem;
       padding: 0 0.9375rem; }
       .top-bar-section li.active:not(.has-form) a:not(.button):hover {
-        background: #0078a0;
+        background: #464646;
         color: #FFFFFF; }
     .top-bar-section .has-dropdown > a {
       padding-right: 2.1875rem !important; }
