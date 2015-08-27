@@ -34,6 +34,15 @@
 
 }
 
+#weather {
+  cursor: default;
+}
+
+#weather_id a:hover {
+    background-color: #333333;
+}
+
+
 #profile_nav {
   cursor: default;
 }
