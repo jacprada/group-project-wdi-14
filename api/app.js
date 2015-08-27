@@ -34,48 +34,6 @@ app.use(cors());
 app.use(passport.initialize());
 app.use(flash());
 
-// app.post('/signup', function(req, res) {
-//   passport.authenticate('local-signup', {
-//     successRedirect : '/bars',
-//     failureRedirect : '/users',
-//     failureFlash : true
-//   })(req, res, function(){
-//     res.redirect('/bars');
-//   });
-// });
-
-app.post('/signup', function(req, res, next) {
-  passport.authenticate('local-signup', function(err, user, info) {
-      if (err) return next(err)
-        
-      if (!user) {
-        return res.status(401).send({ error: 'User already exists!' });
-      }
-
-      // User has authenticated so issue token 
-      var token = jwt.sign(user, "barapp", { expiresInMinutes: 1440 });
-
-      // Send back the token to the front-end to store
-      res.status(200).send({ 
-        message: "Thank you for authenticating",
-        token: token,
-        user: user
-      });
-
-    })(req, res, next);
-});
-
-// app.use('/', expressJWT({secret: config.secret}));
-
-// app.get('/bars',
-//   expressJWT({secret: config.secret}),
-//   function(req, res) {
-//     if (!req.user) return res.send(401);
-//     res.send(200);
-//     console.log("accessed")
-//   });
-
-
 var routes = require('./config/routes');
 app.use(routes);
 
