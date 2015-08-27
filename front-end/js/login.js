@@ -80,7 +80,7 @@ $(function(){
         name: $(".bar_name").val(),
         address: $(".bar_address").val(),
         description: $(".bar_description").val(),
-        image: $(".bar_image").val(),
+        image: $(".bar_image").val()
       },
       dataType: "json",
       beforeSend: function(request){
