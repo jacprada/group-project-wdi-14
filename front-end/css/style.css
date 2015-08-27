@@ -97,13 +97,6 @@ h1.welcome-signup {
   color: #F5881E;
 }
 
-.welcome-wrapper {
-  display: none;
-  width: 100vh;
-  height: 700px;
-  margin-top: 80px;
-}
-
 .welcome-info {
   display: none;
   text-align: center;
@@ -128,6 +121,14 @@ h1.welcome-signup {
 
   #logo-large {
     height: 200px;
+  }
+
+  .welcome-info {
+    margin-top: 55px;
+  }
+
+  #logo-small {
+    height: 80px;
   }
   
 }
