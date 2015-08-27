@@ -10,7 +10,7 @@ var User = require('../models/user');
 var jwt = require('jsonwebtoken');
 var expressJWT = require('express-jwt');
 
-router.post('/login', authenticate);
+router.post('/login', login);
 router.post('/signup', signup);
 
 // router.use('/', expressJWT({secret: "barapp"}));
@@ -35,6 +35,7 @@ router.route('/bars/:id')
   .put(barsController.updateBar)
   .delete(barsController.deleteBar)
 
+// Route to signup (login) a user
 function signup(req, res, next) {
   passport.authenticate('local-signup', function(err, user, info) {
       if (err) return next(err)
@@ -53,8 +54,8 @@ function signup(req, res, next) {
     })(req, res, next);
 };
 
-// route to authenticate (login) a user
-function authenticate(req, res, next) {
+// Route to authenticate (login) a user
+function login(req, res, next) {
   User.findOne({
     email: req.body.email
   }, function(err, user) {
@@ -79,7 +80,7 @@ function authenticate(req, res, next) {
   });
 };
 
-// route middleware to verify a token
+// Route middleware to verify a token
 function decode(req, res, next) {
   // check header or url parameters or post parameters for token
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
