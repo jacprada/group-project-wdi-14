@@ -73,6 +73,11 @@ label {
 
 a#switch.switch.tiny {
   height: 45px;
+  cursor: default;
+}
+
+#switch_div a:hover {
+  background-color: #333333;
 }
 
 #weather {
