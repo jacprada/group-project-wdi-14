@@ -8,12 +8,9 @@ var usersController = require('../controllers/user');
 var barsController = require('../controllers/bar');
 var User = require('../models/user');
 var jwt = require('jsonwebtoken');
-var expressJWT = require('express-jwt');
 
 router.post('/login', login);
 router.post('/signup', signup);
-
-// router.use('/', expressJWT({secret: "barapp"}));
 
 router.use(decode);
 
@@ -38,8 +35,8 @@ router.route('/bars/:id')
 // Route to signup (login) a user
 function signup(req, res, next) {
   passport.authenticate('local-signup', function(err, user, info) {
-      if (err) return next(err)
-        
+    if (err) return next(err)
+      
       if (!user) {
         return res.status(401).send({ error: 'User already exists!' });
       }
@@ -52,7 +49,7 @@ function signup(req, res, next) {
         user: user
       });
     })(req, res, next);
-};
+  };
 
 // Route to authenticate (login) a user
 function login(req, res, next) {

@@ -40,32 +40,4 @@ module.exports = function(passport) {
     });
   }));
 
-  // passport.use('local-login', new LocalStrategy({
-  //   usernameField : 'email',
-  //   passwordField : 'password',
-  //   passReqToCallback : true
-  // }, function(req, email, password, done){
-
-  //   // Search for a user with an email from the login form
-  //   User.findOne({ 'email' : email }, function(err, user) {
-  //     // If an exception occurred while verifying the credentials (for example, if the database is not available), done should be invoked with an error, in conventional Node style.
-  //     if (err) { return done(err) };
-
-  //     // If no user has been found
-  //     if (!user) {
-  //       // Strategies require what is known as a verify callback.
-  //       // If the credentials are not valid (for example, if the password is incorrect), 
-  //       // done should be invoked with false instead of a user to indicate an authentication failure.
-  //       return done(null, false)
-  //     };
-
-  //     // If password is invalid
-  //     if (!user.validPassword(password)) {
-  //       return done(null, false);
-  //     } 
-        
-  //     // User has been authenticated, return user
-  //     return done(null, user);
-  //   });
-  // }));
 }
