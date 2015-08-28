@@ -72,7 +72,12 @@ label {
 }
 
 a#switch.switch.tiny {
-  height: 45px;
+ height: 45px;
+ cursor: default;
+}
+
+#switch_div a:hover {
+ background-color: #333333 ;
 }
 
 #weather {
@@ -176,7 +181,7 @@ h2.welcome-signup {
 
   h2.welcome-signup {
     line-height: 1;
-    font-size: 19px;
+    font-size: 28px;
     font-weight: 400;
   }
 
