@@ -9,12 +9,13 @@ function initialize() {
 
   $(document).foundation();
   $('a.custom-close-reveal-modal').click(function(){
-    $('#about').foundation('reveal', 'close');
-    $('#login_div').foundation('reveal', 'close');
+    // $('#about').foundation('reveal', 'close');
+    // $('#login_div').foundation('reveal', 'close');
   });
 
   // Getting the map div in the html file
   var mapCanvas = document.getElementById('map');
+
   // Setting up map options to render map of London
   var center = new google.maps.LatLng(51.517557, -0.095624);
 
@@ -49,11 +50,13 @@ function initialize() {
     } else {
       window.map.setOptions({styles: style_black});
     }
-  }) 
+  })
+
   // Center the map once an info window has been opened
   google.maps.event.addDomListener(window, 'resize', function() {
     window.map.setCenter(center);
   });
+
   // Once map has loaded fully then start adding bars
   google.maps.event.addListenerOnce(map, 'idle', function(){
     setTimeout(function(){
