@@ -98,20 +98,6 @@ $(function(){
     });
   });
 
-  // $("#check").on("click", function(){
-  //     event.preventDefault();
-  //     $.ajax({
-  //       type: "get",
-  //       url: $(this).attr("href"),
-  //       dataType: "json",
-  //       beforeSend: function(request){
-  //         checkAccess(request)
-  //       },
-  //     }).done(function(data, response){
-  //       console.log(data);
-  //     });
-  //   });
-
   // $("#profile").on("click", function(){
   //   var super_id = localStorage.getItem("access_id");
   //   console.log("is this the id? " + super_id);
