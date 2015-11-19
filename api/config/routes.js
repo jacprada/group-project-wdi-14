@@ -37,19 +37,19 @@ function signup(req, res, next) {
   passport.authenticate('local-signup', function(err, user, info) {
     if (err) return next(err)
       
-      if (!user) {
-        return res.status(401).send({ error: 'User already exists!' });
-      }
-      // User has authenticated so issue token 
-      var token = jwt.sign(user, "barapp", { expiresInMinutes: 1440 });
-      // Send back the token to the front-end to store
-      res.status(200).send({ 
-        message: "Thank you for authenticating",
-        token: token,
-        user: user
-      });
-    })(req, res, next);
-  };
+    if (!user) {
+      return res.status(401).send({ error: 'User already exists!' });
+    }
+    // User has authenticated so issue token 
+    var token = jwt.sign(user, "barapp", { expiresInMinutes: 1440 });
+    // Send back the token to the front-end to store
+    res.status(200).send({ 
+      message: "Thank you for authenticating",
+      token: token,
+      user: user
+    });
+  })(req, res, next);
+};
 
 // Route to authenticate (login) a user
 function login(req, res, next) {
